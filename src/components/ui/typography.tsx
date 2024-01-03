@@ -18,7 +18,7 @@ const createTypography = (tag: string, defaultClassName: string) => {
 
 export const TypographyH1 = createTypography(
   'h1',
-  'scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl',
+  'font-serif scroll-m-20 text-4xl font-extrabold tracking-normal lg:text-5xl',
 )
 
 export const TypographyH2 = createTypography(
@@ -36,20 +36,14 @@ export const TypographyH4 = createTypography(
   'scroll-m-20 text-xl font-semibold tracking-tight',
 )
 
-export const TypographyP = createTypography(
-  'p',
-  'leading-7 [&:not(:first-child)]:mt-6',
-)
+export const TypographyP = createTypography('p', 'leading-7')
 
 export const TypographyBlockQuote = createTypography(
   'blockquote',
-  'mt-6 border-l-2 pl-6 italic',
+  ' border-l-2 pl-6 italic',
 )
 
-export const TypographyUL = createTypography(
-  'ul',
-  'my-6 ml-6 list-disc [&>li]:mt-2',
-)
+export const TypographyUL = createTypography('ul', 'ml-6 list-disc [&>li]:mt-2')
 
 export const TypographyInlineCode = createTypography(
   'code',

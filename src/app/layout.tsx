@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { cn } from '@/lib/utils'
-import { fontSans } from '@/config/font'
+import { fontSans, fontSerif } from '@/config/font'
 import { ThemeProvider } from '@/components/theme-provider'
+import { AnimationProvider } from '@/components/animation-provider'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -20,6 +21,7 @@ export default function RootLayout({
         className={cn(
           'min-h-screen bg-background font-sans antialiased',
           fontSans.variable,
+          fontSerif.variable,
         )}
       >
         <ThemeProvider
@@ -28,7 +30,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <AnimationProvider>{children}</AnimationProvider>
         </ThemeProvider>
       </body>
     </html>
