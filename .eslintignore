@@ -1,0 +1,10 @@
+*.min.js
+*.worker.js
+*.js.hbs
+*.gltf
+*.glb
+.babel_cache/
+node_modules/
+src/static/
+src/server/build/
+src/server-prod.js
