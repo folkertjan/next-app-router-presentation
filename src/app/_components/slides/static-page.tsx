@@ -27,7 +27,7 @@ export const StaticPage = (_: SlideProps) => {
   )
 }
 
-export const StaticPageTwo = ({ index }: SlideProps) => {
+export const StaticPageTwo = (_: SlideProps) => {
   return (
     <div className="h-full p-2 pt-4 flex flex-col items-center justify-start relative">
       <TypographyH3
@@ -41,7 +41,7 @@ export const StaticPageTwo = ({ index }: SlideProps) => {
 
       <div className="absolute top-2 right-2">
         <Button asChild variant="secondary">
-          <Link href={`/examples/static-page?back=${index}`}>More info</Link>
+          <Link href="/examples/static-page">More info</Link>
         </Button>
       </div>
     </div>

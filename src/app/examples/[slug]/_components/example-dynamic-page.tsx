@@ -2,6 +2,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Example } from './example'
 import { SyntaxHighlighter, syntaxDocument } from './syntax-highlighter'
 import { Prose } from '@/components/ui/typography'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 export const ExampleDynamicPage = () => {
   return (
@@ -50,12 +52,21 @@ export const ExampleDynamicPageSideBySide = ({
       </TabsList>
       <TabsContent value="pages">
         <SyntaxHighlighter document={pageRouterOne} />
+        <Button asChild variant="secondary">
+          <Link href="/examples/live/static">Live example</Link>
+        </Button>
       </TabsContent>
       <TabsContent value="app-one">
         <SyntaxHighlighter document={appRouterOne} />
+        <Button asChild variant="secondary">
+          <Link href="/examples/live/dynamic-params">Live example</Link>
+        </Button>
       </TabsContent>
       <TabsContent value="app-two">
         <SyntaxHighlighter document={appRouterTwo} />
+        <Button asChild variant="secondary">
+          <Link href="/examples/live/dynamic-config">Live example</Link>
+        </Button>
       </TabsContent>
     </Tabs>
   )

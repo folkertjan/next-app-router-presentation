@@ -10,6 +10,7 @@ import {
 import { type CarouselApi } from '@/components/ui/carousel'
 import { cn } from '@/lib/utils'
 import { createContext, useContext, useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 const SliderContext = createContext<CarouselApi>(null)
 
@@ -24,30 +25,30 @@ interface SliderProps extends React.PropsWithChildren {
 export const Slider = ({
   children,
   className,
-  startIndex = 0,
+  startIndex: passedStartIndex = 0,
 }: SliderProps) => {
+  const [startIndex] = useState(passedStartIndex)
   const [api, setApi] = useState<CarouselApi>(null)
 
   useKeydown('ArrowLeft', () => api?.scrollPrev())
   useKeydown('ArrowRight', () => api?.scrollNext())
+
+  const router = useRouter()
 
   useEffect(() => {
     if (!api) return
 
     const handleSelect = (eventApi: CarouselApi) => {
       const index = eventApi.selectedScrollSnap()
-      window.history.replaceState(
-        null,
-        '',
-        window.location.pathname + `?slide=${index}`,
-      )
+
+      router.replace(window.location.pathname + `?slide=${index}`)
     }
     api.on('select', handleSelect)
 
     return () => {
       api?.off?.('select', handleSelect)
     }
-  }, [api])
+  }, [api, router])
 
   return (
     <Carousel
