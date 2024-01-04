@@ -1,7 +1,7 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Example } from './example'
 import { SyntaxHighlighter, syntaxDocument } from './syntax-highlighter'
 import { Prose } from '@/components/ui/typography'
+import { CodeTabs, CodeTabsTab } from '@/app/_components/code-tabs'
 
 export const ExampleLayout = () => {
   return (
@@ -58,26 +58,26 @@ export const ExampleLayoutSideBySide = ({
   className,
 }: ExampleLayoutSideBySideProps) => {
   return (
-    <Tabs defaultValue="pages-one" className={className}>
-      <TabsList className="grid w-full grid-cols-4">
-        <TabsTrigger value="pages-one">Pages: Layout</TabsTrigger>
-        <TabsTrigger value="pages-two">Pages: Page</TabsTrigger>
-        <TabsTrigger value="app-one">App: Layout</TabsTrigger>
-        <TabsTrigger value="app-two">App: Page</TabsTrigger>
-      </TabsList>
-      <TabsContent value="pages-one">
+    <CodeTabs
+      tabs={['Pages: Layout', 'Pages: Page', 'App: Layout', 'App: Page']}
+      className={className}
+    >
+      <CodeTabsTab>
         <SyntaxHighlighter document={pageRouterOne} />
-      </TabsContent>
-      <TabsContent value="pages-two">
+      </CodeTabsTab>
+
+      <CodeTabsTab>
         <SyntaxHighlighter document={pageRouterTwo} />
-      </TabsContent>
-      <TabsContent value="app-one">
+      </CodeTabsTab>
+
+      <CodeTabsTab>
         <SyntaxHighlighter document={appRouterOne} />
-      </TabsContent>
-      <TabsContent value="app-two">
+      </CodeTabsTab>
+
+      <CodeTabsTab>
         <SyntaxHighlighter document={appRouterTwo} />
-      </TabsContent>
-    </Tabs>
+      </CodeTabsTab>
+    </CodeTabs>
   )
 }
 
@@ -138,7 +138,7 @@ const pageRouterThree = syntaxDocument`
 
 const appRouterOne = syntaxDocument`
 // app/layout.tsx
-// layout and children can not share props
+// (!) layout and pages can not pass props to eachother
 
 const Layout = async ({ children }) => {
   const res = await fetch('https://this-returns-a-title.com')
@@ -157,6 +157,7 @@ export default Layout
 
 const appRouterTwo = syntaxDocument`
   // app/page.tsx
+  // (!) layout and pages can not pass props to eachother
 
   const HomePage = async () => {
     // Cached return, as layout already fetched this

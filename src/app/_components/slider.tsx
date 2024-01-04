@@ -11,6 +11,7 @@ import { type CarouselApi } from '@/components/ui/carousel'
 import { cn } from '@/lib/utils'
 import { createContext, useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useQueryParamControls } from '../_hooks/use-query-param-controls'
 
 const SliderContext = createContext<CarouselApi>(null)
 
@@ -33,22 +34,24 @@ export const Slider = ({
   useKeydown('ArrowLeft', () => api?.scrollPrev())
   useKeydown('ArrowRight', () => api?.scrollNext())
 
-  const router = useRouter()
+  const { setMany } = useQueryParamControls()
 
   useEffect(() => {
     if (!api) return
 
     const handleSelect = (eventApi: CarouselApi) => {
-      const index = eventApi.selectedScrollSnap()
+      const index = eventApi.selectedScrollSnap() as number
 
-      router.replace(window.location.pathname + `?slide=${index}`)
+      setMany({
+        slide: index.toString(),
+      })
     }
     api.on('select', handleSelect)
 
     return () => {
       api?.off?.('select', handleSelect)
     }
-  }, [api, router])
+  }, [api, setMany])
 
   return (
     <Carousel

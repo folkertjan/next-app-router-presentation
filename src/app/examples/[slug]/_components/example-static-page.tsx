@@ -1,7 +1,9 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Example } from './example'
 import { SyntaxHighlighter, syntaxDocument } from './syntax-highlighter'
 import { Prose } from '@/components/ui/typography'
+import { CodeTabs, CodeTabsTab } from '@/app/_components/code-tabs'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 export const ExampleStaticPage = () => {
   return (
@@ -38,18 +40,18 @@ export const ExampleStaticPageSideBySide = ({
   className,
 }: ExampleStaticPageSideBySideProps) => {
   return (
-    <Tabs defaultValue="pages" className={className}>
-      <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="pages">Pages</TabsTrigger>
-        <TabsTrigger value="app">App</TabsTrigger>
-      </TabsList>
-      <TabsContent value="pages">
+    <CodeTabs tabs={['Pages', 'App']} className={className}>
+      <CodeTabsTab>
         <SyntaxHighlighter document={pageRouterOne} />
-      </TabsContent>
-      <TabsContent value="app">
+      </CodeTabsTab>
+
+      <CodeTabsTab>
         <SyntaxHighlighter document={appRouterOne} />
-      </TabsContent>
-    </Tabs>
+        <Button asChild variant="secondary">
+          <Link href="/examples/live/static">Live example</Link>
+        </Button>
+      </CodeTabsTab>
+    </CodeTabs>
   )
 }
 

@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import { Refresh } from '../_components/refresh'
 import { Time } from '../_components/time'
 import { TypographyH1 } from '@/components/ui/typography'
+import { ComponentBuiltLastTime } from '../_components/time-group'
 
 interface TestPageProps {
   searchParams?: {
@@ -12,9 +13,7 @@ interface TestPageProps {
 const TestPage = ({ searchParams: { q } = {} }: TestPageProps) => {
   return (
     <>
-      <div className="pb-4 border-b mt-4 mb-8">
-        Page: <Time />
-      </div>
+      <ComponentBuiltLastTime label="Page" />
 
       <TypographyH1>Example: Dynamic params</TypographyH1>
 

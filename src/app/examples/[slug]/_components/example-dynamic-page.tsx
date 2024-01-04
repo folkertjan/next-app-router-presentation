@@ -1,9 +1,9 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Example } from './example'
 import { SyntaxHighlighter, syntaxDocument } from './syntax-highlighter'
 import { Prose } from '@/components/ui/typography'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import { CodeTabs, CodeTabsTab } from '@/app/_components/code-tabs'
 
 export const ExampleDynamicPage = () => {
   return (
@@ -44,31 +44,26 @@ export const ExampleDynamicPageSideBySide = ({
   className,
 }: ExampleDynamicPageSideBySideProps) => {
   return (
-    <Tabs defaultValue="pages" className={className}>
-      <TabsList className="grid w-full grid-cols-3">
-        <TabsTrigger value="pages">Pages</TabsTrigger>
-        <TabsTrigger value="app-one">App - Query params</TabsTrigger>
-        <TabsTrigger value="app-two">App - Custom config</TabsTrigger>
-      </TabsList>
-      <TabsContent value="pages">
+    <CodeTabs
+      tabs={['Pages', 'App - Query params', 'App - Custom config']}
+      className={className}
+    >
+      <CodeTabsTab>
         <SyntaxHighlighter document={pageRouterOne} />
-        <Button asChild variant="secondary">
-          <Link href="/examples/live/static">Live example</Link>
-        </Button>
-      </TabsContent>
-      <TabsContent value="app-one">
+      </CodeTabsTab>
+      <CodeTabsTab>
         <SyntaxHighlighter document={appRouterOne} />
         <Button asChild variant="secondary">
           <Link href="/examples/live/dynamic-params">Live example</Link>
         </Button>
-      </TabsContent>
-      <TabsContent value="app-two">
+      </CodeTabsTab>
+      <CodeTabsTab>
         <SyntaxHighlighter document={appRouterTwo} />
         <Button asChild variant="secondary">
           <Link href="/examples/live/dynamic-config">Live example</Link>
         </Button>
-      </TabsContent>
-    </Tabs>
+      </CodeTabsTab>
+    </CodeTabs>
   )
 }
 
