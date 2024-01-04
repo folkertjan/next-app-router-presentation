@@ -23,7 +23,7 @@ export const TypographyH1 = createTypography(
 
 export const TypographyH2 = createTypography(
   'h2',
-  'scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0',
+  'scroll-m-20 border-b pb-4 text-3xl font-semibold tracking-tight first:mt-0',
 )
 
 export const TypographyH3 = createTypography(
@@ -33,7 +33,7 @@ export const TypographyH3 = createTypography(
 
 export const TypographyH4 = createTypography(
   'h4',
-  'scroll-m-20 text-xl font-semibold tracking-tight',
+  'scroll-m-20 text-xl font-sans text-slate-200 font-semibold tracking-normal',
 )
 
 export const TypographyP = createTypography('p', 'leading-7')
@@ -65,4 +65,9 @@ export const TypographySmall = createTypography(
 export const TypographyMuted = createTypography(
   'p',
   'text-sm text-muted-foreground',
+)
+
+export const Prose = createTypography(
+  'div',
+  'prose dark:prose-invert lg:prose-lg',
 )

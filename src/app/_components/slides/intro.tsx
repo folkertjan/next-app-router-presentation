@@ -1,5 +1,9 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { TypographyH1, TypographyP } from '@/components/ui/typography'
+import {
+  TypographyBlockQuote,
+  TypographyH1,
+  TypographyP,
+} from '@/components/ui/typography'
 import { SlideProps } from './types'
 
 export const Intro = (_: SlideProps) => {
@@ -12,7 +16,14 @@ export const Intro = (_: SlideProps) => {
         <h2>React App Router Shenanigans</h2>
       </TypographyH1>
 
-      <div className="inline-flex items-center justify-center mt-8">
+      <TypographyBlockQuote
+        asChild
+        className="text-center text-balance max-w-lg mx-auto mt-6"
+      >
+        <h3>Episode 1: Data fetching</h3>
+      </TypographyBlockQuote>
+
+      <div className="inline-flex items-center justify-center mt-16">
         <Avatar>
           <AvatarImage
             src="https://github.com/folkertjan.png"
