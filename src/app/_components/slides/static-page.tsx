@@ -37,7 +37,10 @@ export const StaticPageTwo = (_: SlideProps) => {
         <h3>Static page: Side-by-side</h3>
       </TypographyH3>
 
-      <ExampleStaticPageSideBySide className="mt-6 w-full md:w-4/5 xl:w-3/5" />
+      <ExampleStaticPageSideBySide
+        syncUrl
+        className="mt-6 w-full md:w-4/5 xl:w-3/5"
+      />
 
       <div className="absolute top-2 right-2">
         <Button asChild variant="secondary">

@@ -35,12 +35,14 @@ export const ExampleStaticPage = () => {
 
 interface ExampleStaticPageSideBySideProps {
   className?: string
+  syncUrl?: boolean
 }
 export const ExampleStaticPageSideBySide = ({
   className,
+  syncUrl,
 }: ExampleStaticPageSideBySideProps) => {
   return (
-    <CodeTabs tabs={['Pages', 'App']} className={className}>
+    <CodeTabs syncUrl={syncUrl} tabs={['Pages', 'App']} className={className}>
       <CodeTabsTab>
         <SyntaxHighlighter document={pageRouterOne} />
       </CodeTabsTab>

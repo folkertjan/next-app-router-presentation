@@ -39,12 +39,15 @@ export const ExampleDynamicPage = () => {
 
 interface ExampleDynamicPageSideBySideProps {
   className?: string
+  syncUrl?: boolean
 }
 export const ExampleDynamicPageSideBySide = ({
   className,
+  syncUrl,
 }: ExampleDynamicPageSideBySideProps) => {
   return (
     <CodeTabs
+      syncUrl={syncUrl}
       tabs={['Pages', 'App - Query params', 'App - Custom config']}
       className={className}
     >

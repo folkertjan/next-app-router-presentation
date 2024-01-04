@@ -53,12 +53,15 @@ export const ExampleLayout = () => {
 
 interface ExampleLayoutSideBySideProps {
   className?: string
+  syncUrl?: boolean
 }
 export const ExampleLayoutSideBySide = ({
   className,
+  syncUrl,
 }: ExampleLayoutSideBySideProps) => {
   return (
     <CodeTabs
+      syncUrl={syncUrl}
       tabs={['Pages: Layout', 'Pages: Page', 'App: Layout', 'App: Page']}
       className={className}
     >

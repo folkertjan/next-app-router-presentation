@@ -17,9 +17,15 @@ const possibleGridClassNames = [
 export interface CodeTabsProps extends React.PropsWithChildren {
   tabs: string[]
   className?: string
+  syncUrl?: boolean
 }
 
-const CodeTabsBase = ({ tabs = [], children, className }: CodeTabsProps) => {
+const CodeTabsBase = ({
+  tabs = [],
+  children,
+  syncUrl,
+  className,
+}: CodeTabsProps) => {
   const params = useSearchParams()
   const [mountDefaultValue] = useState(params.get('tab') ?? '')
   const defaultValue = tabs.includes(mountDefaultValue)
@@ -33,7 +39,7 @@ const CodeTabsBase = ({ tabs = [], children, className }: CodeTabsProps) => {
   return (
     <Tabs
       defaultValue={defaultValue}
-      onValueChange={(value) => set('tab', value)}
+      onValueChange={(value) => (syncUrl ? set('tab', value) : null)}
       className={className}
     >
       <TabsList className={cn('grid w-full', gridClassName)}>

@@ -1,5 +1,5 @@
 'use client'
-import useKeydown from '@buildinams/use-keydown'
+
 import {
   Carousel,
   CarouselContent,
@@ -7,17 +7,29 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel'
+import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
 import { type CarouselApi } from '@/components/ui/carousel'
 import { cn } from '@/lib/utils'
-import { createContext, useContext, useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import {
+  Children,
+  cloneElement,
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
+import FocusLock from 'react-focus-lock'
 import { useQueryParamControls } from '../_hooks/use-query-param-controls'
+import { group } from 'console'
 
 const SliderContext = createContext<CarouselApi>(null)
 
 export const useSliderContext = () => {
   return useContext(SliderContext)
 }
+
+const PLUGINS = [WheelGesturesPlugin()]
 
 interface SliderProps extends React.PropsWithChildren {
   className?: string
@@ -31,9 +43,6 @@ export const Slider = ({
   const [startIndex] = useState(passedStartIndex)
   const [api, setApi] = useState<CarouselApi>(null)
 
-  useKeydown('ArrowLeft', () => api?.scrollPrev())
-  useKeydown('ArrowRight', () => api?.scrollNext())
-
   const { setMany } = useQueryParamControls()
 
   useEffect(() => {
@@ -41,7 +50,6 @@ export const Slider = ({
 
     const handleSelect = (eventApi: CarouselApi) => {
       const index = eventApi.selectedScrollSnap() as number
-
       setMany({
         slide: index.toString(),
       })
@@ -61,9 +69,16 @@ export const Slider = ({
         startIndex,
         watchDrag: false,
       }}
+      plugins={PLUGINS}
     >
       <CarouselContent className="h-full" wrapperClassName="h-full">
-        <SliderContext.Provider value={api}>{children}</SliderContext.Provider>
+        <SliderContext.Provider value={api}>
+          {Children.map(children, (child, i) => {
+            return cloneElement(child as React.ReactElement, {
+              index: i,
+            })
+          })}
+        </SliderContext.Provider>
       </CarouselContent>
       <CarouselNext />
       <CarouselPrevious />
@@ -71,10 +86,44 @@ export const Slider = ({
   )
 }
 
-export const SliderSlide = ({ children }: React.PropsWithChildren) => {
+interface SliderSlideProps extends React.PropsWithChildren {
+  index?: number
+  parentRef?: React.RefObject<HTMLDivElement>
+}
+
+export const SliderSlide = ({ children, index }: SliderSlideProps) => {
+  const [isActive, setIsActive] = useState(false)
+
+  const api = useSliderContext()
+
+  useEffect(() => {
+    if (!api) return
+
+    const handleSelect = (eventApi: CarouselApi) => {
+      const activeIndex = eventApi.selectedScrollSnap() as number
+      setIsActive(activeIndex === index)
+    }
+    api.on('select', handleSelect)
+    handleSelect(api)
+
+    return () => {
+      api?.off?.('select', handleSelect)
+    }
+  }, [api, index])
+
   return (
-    <CarouselItem className="w-full h-full flex flex-col justify-center">
-      {children}
+    <CarouselItem
+      className="w-full h-full"
+      {...{ inert: isActive ? undefined : '' }}
+    >
+      <FocusLock
+        disabled={!isActive}
+        group="slider"
+        autoFocus={false}
+        className="w-full h-full flex flex-col justify-center"
+      >
+        {children}
+      </FocusLock>
     </CarouselItem>
   )
 }
