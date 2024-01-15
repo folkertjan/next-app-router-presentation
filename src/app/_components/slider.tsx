@@ -22,6 +22,7 @@ import {
 import FocusLock from 'react-focus-lock'
 import { useQueryParamControls } from '../_hooks/use-query-param-controls'
 import { group } from 'console'
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 const SliderContext = createContext<CarouselApi>(null)
 
@@ -122,7 +123,7 @@ export const SliderSlide = ({ children, index }: SliderSlideProps) => {
         autoFocus={false}
         className="w-full h-full flex flex-col justify-center"
       >
-        {children}
+        <ScrollArea>{children}</ScrollArea>
       </FocusLock>
     </CarouselItem>
   )

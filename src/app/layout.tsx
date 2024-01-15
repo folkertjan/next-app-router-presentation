@@ -24,12 +24,7 @@ export default function RootLayout({
           fontSerif.variable,
         )}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <ThemeProvider>
           <AnimationProvider>{children}</AnimationProvider>
         </ThemeProvider>
       </body>

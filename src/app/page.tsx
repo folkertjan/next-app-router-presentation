@@ -1,17 +1,23 @@
 import { Slider, SliderSlide } from './_components/slider'
-import { StaticPage, StaticPageTwo } from './_components/slides/static-page'
-import { Intro } from './_components/slides/intro'
-import { DynamicPage, DynamicPageTwo } from './_components/slides/dynamic-page'
-import { Layout, LayoutTwo } from './_components/slides/layouts'
+import { SlideIntro } from '@/components/scopes/intro/slides'
+import {
+  SlideStaticPage,
+  SlideStaticPageTwo,
+} from '@/components/scopes/static-page/slides'
+import {
+  SlideDynamicPage,
+  SlideDynamicPageTwo,
+} from '@/components/scopes/dynamic-page/slides'
+import { SlideLayout, SlideLayoutTwo } from '@/components/scopes/layout/slides'
 
 const SLIDES = [
-  Intro,
-  StaticPage,
-  StaticPageTwo,
-  DynamicPage,
-  DynamicPageTwo,
-  Layout,
-  LayoutTwo,
+  SlideIntro,
+  SlideStaticPage,
+  SlideStaticPageTwo,
+  SlideDynamicPage,
+  SlideDynamicPageTwo,
+  SlideLayout,
+  SlideLayoutTwo,
 ]
 
 interface HomePageProps {
@@ -25,9 +31,9 @@ const HomePage = ({ searchParams: { slide } = {} }: HomePageProps) => {
   return (
     <main className="h-screen px-16 py-4 lg:py-8 lg:px-16 flex flex-col items-center justify-center">
       <Slider startIndex={startIndex}>
-        {SLIDES.map((SlideContent, index) => (
+        {SLIDES.map((Component, index) => (
           <SliderSlide key={index}>
-            <SlideContent index={index} />
+            <Component />
           </SliderSlide>
         ))}
       </Slider>

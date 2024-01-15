@@ -12,6 +12,7 @@ const possibleGridClassNames = [
   'grid-cols-2',
   'grid-cols-3',
   'grid-cols-4',
+  'grid-cols-5',
 ]
 
 export interface CodeTabsProps extends React.PropsWithChildren {
@@ -27,7 +28,7 @@ const CodeTabsBase = ({
   className,
 }: CodeTabsProps) => {
   const params = useSearchParams()
-  const [mountDefaultValue] = useState(params.get('tab') ?? '')
+  const [mountDefaultValue] = useState(params?.get('tab') ?? '')
   const defaultValue = tabs.includes(mountDefaultValue)
     ? mountDefaultValue
     : tabs[0]
