@@ -1,6 +1,6 @@
 import { ExampleStaticPage } from '@/components/scopes/static-page/example-static-page'
 import { fetchCloudflareInfo } from '@/lib/datalayer/cloudflare'
-import { getLayoutDefault } from '@/pages/_components/layout-default'
+import { getLayoutDefault } from '@/pages-components/layout-default'
 import { GetStaticProps } from 'next'
 
 interface PageProps {

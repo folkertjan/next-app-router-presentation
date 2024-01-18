@@ -2,7 +2,7 @@ import { ExampleStaticPage } from '@/components/scopes/static-page/example-stati
 import { ExampleStaticPageRevalidateOnDemand } from '@/components/scopes/static-page/example-static-page-revalidate-on-demand'
 import { ExampleStaticPageRevalidateTime } from '@/components/scopes/static-page/example-static-page-revalidate-time'
 import { fetchCloudflareInfo } from '@/lib/datalayer/cloudflare'
-import { getLayoutDefault } from '@/pages/_components/layout-default'
+import { getLayoutDefault } from '@/pages-components/layout-default'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 

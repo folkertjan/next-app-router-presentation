@@ -1,5 +1,5 @@
 import { fetchCloudflareInfo } from '@/lib/datalayer/cloudflare'
-import { getLayoutLayout } from '@/pages/_components/layout-layout'
+import { getLayoutLayout } from '@/pages-components/layout-layout'
 
 interface PageProps {
   cloudflare: string
