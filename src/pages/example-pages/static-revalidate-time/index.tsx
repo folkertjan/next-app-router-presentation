@@ -1,4 +1,5 @@
 import { ExampleStaticPage } from '@/components/scopes/static-page/example-static-page'
+import { ExampleStaticPageRevalidateTime } from '@/components/scopes/static-page/example-static-page-revalidate-time'
 import { fetchCloudflareInfo } from '@/lib/datalayer/cloudflare'
 import { getLayoutDefault } from '@/pages/_components/layout-default'
 import { GetStaticProps } from 'next'
@@ -6,11 +7,13 @@ import { GetStaticProps } from 'next'
 interface PageProps {
   cloudflare: string
   time: string
+  revalidate: number
 }
 
-const Page = ({ cloudflare, time }: PageProps) => {
+const Page = ({ cloudflare, time, revalidate }: PageProps) => {
   return (
-    <ExampleStaticPage
+    <ExampleStaticPageRevalidateTime
+      revalidate={revalidate}
       cloudflare={cloudflare}
       time={time}
       suffix="Pages router"
@@ -19,7 +22,7 @@ const Page = ({ cloudflare, time }: PageProps) => {
 }
 
 export const getStaticProps: GetStaticProps<PageProps> = async () => {
-  const data = await fetchCloudflareInfo('pages-static')
+  const data = await fetchCloudflareInfo('pages-static-revalidate-time')
 
   if (!data || !data.ts) {
     return {
@@ -31,7 +34,9 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
     props: {
       cloudflare: data.ts,
       time: new Date().toISOString(),
+      revalidate: 30,
     },
+    revalidate: 30,
   }
 }
 

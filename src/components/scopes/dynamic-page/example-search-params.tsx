@@ -3,18 +3,20 @@ import { TypographyH1 } from '@/components/ui/typography'
 
 interface ExampleSearchParamsProps {
   query?: string
+  time?: string
   cloudflare: string
   suffix: string
 }
 
 export const ExampleSearchParams = ({
   query,
+  time,
   cloudflare,
   suffix,
 }: ExampleSearchParamsProps) => {
   return (
     <>
-      <LastBuild label="Page" />
+      <LastBuild label="Page" time={time} />
 
       <TypographyH1>Example: Search params - {suffix}</TypographyH1>
 

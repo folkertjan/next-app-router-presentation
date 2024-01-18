@@ -1,23 +1,24 @@
 import { Slider, SliderSlide } from './_components/slider'
-import { SlideIntro } from '@/components/scopes/intro/slides'
 import {
-  SlideStaticPage,
-  SlideStaticPageTwo,
-} from '@/components/scopes/static-page/slides'
-import {
-  SlideDynamicPage,
-  SlideDynamicPageTwo,
-} from '@/components/scopes/dynamic-page/slides'
-import { SlideLayout, SlideLayoutTwo } from '@/components/scopes/layout/slides'
+  SlideAppRouterCache,
+  SlideAppRouterData,
+  SlideIntro,
+  SlidePagesRouterCache,
+  SlidePagesRouterData,
+} from '@/components/scopes/intro/slides'
+import { SlideStaticPage } from '@/components/scopes/static-page/slides'
+import { SlideDynamicPage } from '@/components/scopes/dynamic-page/slides'
+import { SlideApi } from '@/components/scopes/api/slides'
 
 const SLIDES = [
   SlideIntro,
+  SlidePagesRouterData,
+  SlidePagesRouterCache,
+  SlideAppRouterData,
+  SlideAppRouterCache,
   SlideStaticPage,
-  SlideStaticPageTwo,
   SlideDynamicPage,
-  SlideDynamicPageTwo,
-  SlideLayout,
-  SlideLayoutTwo,
+  SlideApi,
 ]
 
 interface HomePageProps {

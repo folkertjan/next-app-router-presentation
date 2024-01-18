@@ -1,4 +1,5 @@
 import { Detail } from '@/app/_components/detail'
+import { ApiDetailPage } from '@/components/scopes/api/detail-page'
 import { DynamicPageDetailPage } from '@/components/scopes/dynamic-page/detail-page'
 import { LayoutDetailPage } from '@/components/scopes/layout/detail-page'
 import { StaticPageDetailPage } from '@/components/scopes/static-page/detail-page'
@@ -16,6 +17,10 @@ const COMPONENT_MAP = {
   'layout': {
     title: 'Layout',
     component: LayoutDetailPage,
+  },
+  'api': {
+    title: 'Api',
+    component: ApiDetailPage,
   },
 } as const
 

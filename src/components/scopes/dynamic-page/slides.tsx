@@ -15,33 +15,16 @@ export const SlideDynamicPage = () => {
       >
         <h2>Dynamic page</h2>
       </TypographyH1>
-      <TypographyBlockQuote
+      {/* <TypographyBlockQuote
         asChild
         className="text-center text-balance max-w-md mx-auto mt-8"
       >
         <h3>Blazingly fast</h3>
-      </TypographyBlockQuote>
-    </div>
-  )
-}
+      </TypographyBlockQuote> */}
 
-export const SlideDynamicPageTwo = () => {
-  return (
-    <div className="h-full p-2 pt-4 flex flex-col items-center justify-start relative">
-      <TypographyH3
-        asChild
-        className="text-center text-balance max-w-md mx-auto"
-      >
-        <h3>Dynamic page: Side-by-side</h3>
-      </TypographyH3>
-
-      <div>Examples</div>
-
-      <div className="absolute top-2 right-2">
-        <Button asChild variant="secondary">
-          <Link href="/details/dynamic-page">More info</Link>
-        </Button>
-      </div>
+      <Button asChild variant="secondary" className="mt-10">
+        <Link href="/details/dynamic-page">Details</Link>
+      </Button>
     </div>
   )
 }

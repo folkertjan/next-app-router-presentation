@@ -3,18 +3,20 @@ import { TypographyH1 } from '@/components/ui/typography'
 
 interface ExampleRouteParamsProps {
   id?: string
+  time?: string
   cloudflare: string
   suffix: string
 }
 
 export const ExampleRouteParams = ({
   id,
+  time,
   cloudflare,
   suffix,
 }: ExampleRouteParamsProps) => {
   return (
     <>
-      <LastBuild label="Page" />
+      <LastBuild label="Page" time={time} />
 
       <TypographyH1>Example: Dynamic route params - {suffix}</TypographyH1>
 

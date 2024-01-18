@@ -6,14 +6,14 @@ import {
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
-export const SlideStaticPage = () => {
+export const SlideApi = () => {
   return (
     <div className="p-2 flex flex-col items-center justify-center">
       <TypographyH1
         asChild
         className="text-center text-balance max-w-md mx-auto"
       >
-        <h2>Static page</h2>
+        <h2>API Routes</h2>
       </TypographyH1>
       {/* <TypographyBlockQuote
         asChild
@@ -23,7 +23,7 @@ export const SlideStaticPage = () => {
       </TypographyBlockQuote> */}
 
       <Button asChild variant="secondary" className="mt-10">
-        <Link href="/details/static-page">Details</Link>
+        <Link href="/details/api">Details</Link>
       </Button>
     </div>
   )
