@@ -9,8 +9,11 @@ const isValidData = (data: any): data is CloudflareTraceData => {
   return data && data.ts && data.ip && data.colo && data.fl
 }
 
-export const fetchCloudflareInfo = async (nonce: string) => {
-  const res = await fetch(`https://1.1.1.1/cdn-cgi/trace?_nonce=${nonce}`)
+export const fetchCloudflareInfo = async (
+  nonce: string,
+  init?: RequestInit,
+) => {
+  const res = await fetch(`https://1.1.1.1/cdn-cgi/trace?_nonce=${nonce}`, init)
   const raw = await res.text()
 
   const entries = raw

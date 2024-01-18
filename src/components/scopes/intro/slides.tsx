@@ -81,7 +81,7 @@ export const SlidePagesRouterData = () => {
               </TypographyH4>
               <ul>
                 <li>
-                  <code>/api/some-path.ts</code>
+                  <code>/api/some-path.ts</code> (fetch)
                 </li>
               </ul>
             </Prose>
@@ -196,9 +196,6 @@ export const SlideAppRouterData = () => {
               </TypographyH4>
               <ul>
                 <li>
-                  <code>/some-path/page.tsx</code>
-                </li>
-                <li>
                   <code>fetch()</code>
                 </li>
               </ul>
@@ -214,10 +211,7 @@ export const SlideAppRouterData = () => {
               </TypographyH4>
               <ul>
                 <li>
-                  <code>/some-path/route.ts</code>
-                </li>
-                <li>
-                  <code>fetch()</code>
+                  <code>/some-path/route.ts</code> (fetch)
                 </li>
               </ul>
             </Prose>
@@ -266,10 +260,10 @@ export const SlideAppRouterCache = () => {
               </p>
               <ul>
                 <li>
-                  <code>export const revalidate = 60</code>
+                  <code>revalidate = 60</code>
                 </li>
                 <li>
-                  <code>export const dynamic = 'force-dynamic'</code>
+                  <code>dynamic = 'force-dynamic'</code>
                 </li>
                 <li>
                   <code>revalidatePath(path)</code>
@@ -289,10 +283,10 @@ export const SlideAppRouterCache = () => {
               <p>Per-fetch config, revalidate with time or on demand</p>
               <ul>
                 <li>
-                  <code>fetch(_, {"{ next: { tags: ['some-tag'] }}"})</code>
+                  <code>fetch() (with `tags`)</code>
                 </li>
                 <li>
-                  <code>fetch(_, {'{ next: { revalidate: 30 }}'})</code>
+                  <code>fetch() (with `revalidate`)</code>
                 </li>
                 <li>
                   <code>revalidateTag(tag)</code>
@@ -312,10 +306,7 @@ export const SlideAppRouterCache = () => {
               <p>Response can be cached with response header:</p>
               <ul>
                 <li>
-                  <code>
-                    Response.json({},{' '}
-                    {"{ headers: { 'Cache-Control', 's-maxage=60' }}"})
-                  </code>
+                  <code>'Cache-Control', 's-maxage=60'</code>
                 </li>
               </ul>
             </Prose>

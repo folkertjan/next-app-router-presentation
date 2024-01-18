@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { PageClient } from './page-client'
 
 const Page = async () => {
-  const data = await fetchCloudflareInfo('app-static')
+  const data = await fetchCloudflareInfo('app-static-revalidate-on-demand')
 
   if (!data) {
     return notFound()

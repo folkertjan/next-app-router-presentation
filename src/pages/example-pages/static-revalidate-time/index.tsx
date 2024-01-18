@@ -34,9 +34,9 @@ export const getStaticProps: GetStaticProps<PageProps> = async () => {
     props: {
       cloudflare: data.ts,
       time: new Date().toISOString(),
-      revalidate: 30,
+      revalidate: 5,
     },
-    revalidate: 30,
+    revalidate: 5,
   }
 }
 
