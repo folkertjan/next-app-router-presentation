@@ -1,15 +1,28 @@
-import { Button } from '@/_shared-components/ui/button'
-import { BackButton } from './back-button'
+import { TypographyH4 } from '@/_shared-components/ui/typography'
+import { Category } from '@/_shared-lib/datalayer/products'
+import Link from 'next/link'
 
-interface LayoutRootProps extends React.PropsWithChildren {}
+export interface LayoutRootProps extends React.PropsWithChildren {
+  categories: Category[]
+}
 
-export const LayoutRoot = ({ children }: LayoutRootProps) => {
+export const LayoutRoot = ({ categories, children }: LayoutRootProps) => {
   return (
-    <main className="min-h-screen px-16 py-16 lg:px-20">
+    <main className="min-h-screen px-16 pt-32 pb-16 lg:px-20">
       <div className="fixed flex items-center left-0 top-0 w-full p-4 lg:p-6 bg-background border-b">
-        <Button asChild variant="secondary">
-          <BackButton>Back</BackButton>
-        </Button>
+        <TypographyH4>
+          <Link href="/pages/home-layout">Acme studios</Link>
+        </TypographyH4>
+
+        <ul className="flex ml-auto gap-3">
+          {categories.map((category, index) => (
+            <li key={category} className="underline">
+              <Link href={index === 0 ? '/pages/plp' : '/pages/plp-pages'}>
+                {category}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
 
       {children}
