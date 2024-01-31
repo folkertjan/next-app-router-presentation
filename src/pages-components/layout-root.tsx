@@ -8,7 +8,7 @@ export interface LayoutRootProps extends React.PropsWithChildren {
 
 export const LayoutRoot = ({ categories, children }: LayoutRootProps) => {
   return (
-    <main className="min-h-screen px-16 pt-32 pb-16 lg:px-20">
+    <main className="min-h-screen px-4 pt-28 pb-16 lg:px-10">
       <div className="fixed flex items-center left-0 top-0 w-full p-4 lg:p-6 bg-background border-b">
         <TypographyH4>
           <Link href="/pages/home-layout">Acme studios</Link>

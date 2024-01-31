@@ -1,12 +1,14 @@
 import { GetServerSideProps } from 'next'
-import Link from 'next/link'
+
 import {
   Product,
   fetchCategories,
   fetchProductsByPage,
 } from '@/_shared-lib/datalayer/products'
-import { TypographyUL } from '@/_shared-components/ui/typography'
-import { Button } from '@/_shared-components/ui/button'
+import { ProductList } from '@/_shared-components/scopes/products/product-list'
+import { PaginationStats } from '@/_shared-components/scopes/products/pagination-stats'
+import { PaginationLink } from '@/_shared-components/scopes/products/pagination-link'
+
 import { LayoutRootProps, getLayoutRoot } from '@/pages-components/layout-root'
 
 interface PLPProps extends LayoutRootProps {
@@ -16,39 +18,40 @@ interface PLPProps extends LayoutRootProps {
   currentPage: number
 }
 
-const PLP = (props: PLPProps) => {
-  const hasPreviousPage = props.currentPage > 1
+const PLP = ({ products, totalResults, totalPages, currentPage }: PLPProps) => {
+  const hasPreviousPage = currentPage > 1
 
-  const hasNextPage = props.currentPage < props.totalPages
+  const hasNextPage = currentPage < totalPages
   return (
     <>
-      <TypographyUL>
-        {props.products.map((product) => {
-          return <li key={product.id}>{product.title}</li>
-        })}
-      </TypographyUL>
-      <div className="mt-4">Results: {props.totalResults}</div>
-      <div>Pages: {props.totalPages}</div>
-      <p>Current page: {props.currentPage}</p>
+      <ProductList products={products} />
+
+      <div className="my-4 px-4 py-2 border rounded-sm w-fit">
+        <PaginationStats
+          currentPage={currentPage}
+          totalPages={totalPages}
+          totalResults={totalResults}
+        />
+      </div>
 
       <div className="flex gap-2">
-        <Link
-          href={`/pages/plp-pages/?page=${props.currentPage - 1}`}
-          {...{ inert: !hasPreviousPage ? '' : undefined }}
+        <PaginationLink
+          basePath="/pages/plp-pages/"
+          page={currentPage}
+          disabled={!hasPreviousPage}
+          backward
         >
-          <Button variant={hasPreviousPage ? 'secondary' : 'outline'}>
-            Previous page
-          </Button>
-        </Link>
+          Previous page
+        </PaginationLink>
 
-        <Link
-          href={`/pages/plp-pages/?page=${props.currentPage + 1}`}
-          {...{ inert: !hasNextPage ? '' : undefined }}
+        <PaginationLink
+          basePath="/pages/plp-pages/"
+          page={currentPage}
+          disabled={!hasNextPage}
+          forward
         >
-          <Button variant={hasNextPage ? 'secondary' : 'outline'}>
-            Next page
-          </Button>
-        </Link>
+          Next page
+        </PaginationLink>
       </div>
     </>
   )

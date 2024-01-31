@@ -1,31 +1,19 @@
 import { GetStaticProps } from 'next'
+
 import { Product, fetchProducts } from '@/_shared-lib/datalayer/products'
-import {
-  TypographyH1,
-  TypographyH2,
-  TypographyUL,
-} from '@/_shared-components/ui/typography'
+import { TypographyH1 } from '@/_shared-components/ui/typography'
+import { ProductList } from '@/_shared-components/scopes/products/product-list'
 
 interface HomePageProps {
   products: Product[]
 }
 
-const Home = (props: HomePageProps) => {
+const Home = ({ products }: HomePageProps) => {
   return (
     <div className="p-4">
       <TypographyH1 className="mb-8">Home</TypographyH1>
 
-      {props.products.length === 0 ? (
-        <TypographyH2>No products found</TypographyH2>
-      ) : null}
-
-      {props.products.length > 0 ? (
-        <TypographyUL>
-          {props.products.map((product) => {
-            return <li key={product.id}>{product.title}</li>
-          })}
-        </TypographyUL>
-      ) : null}
+      <ProductList products={products} />
     </div>
   )
 }

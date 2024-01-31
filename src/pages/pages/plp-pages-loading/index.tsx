@@ -1,5 +1,5 @@
 import { GetServerSideProps } from 'next'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
 import useSWR, { SWRConfig, unstable_serialize } from 'swr'
 
 import {
@@ -8,13 +8,15 @@ import {
   fetchProductsByPage,
 } from '@/_shared-lib/datalayer/products'
 import { TypographyUL } from '@/_shared-components/ui/typography'
-import { Button } from '@/_shared-components/ui/button'
+import { PaginationLink } from '@/_shared-components/scopes/products/pagination-link'
+import { ProductList } from '@/_shared-components/scopes/products/product-list'
+import { PaginationStats } from '@/_shared-components/scopes/products/pagination-stats'
+
 import {
   LayoutRootSwrProps,
   getLayoutRootSwr,
 } from '@/pages-components/layout-root-swr'
-import { useRouter } from 'next/router'
-import { delay } from '@/_shared-lib/utils'
+import { useEffect, useRef } from 'react'
 
 interface PLPProps extends LayoutRootSwrProps {}
 
@@ -30,8 +32,6 @@ interface PLPSwrProps extends PLPProps {
 }
 
 const fetcher = async ([_, currentPage]: any[]) => {
-  await delay(1000)
-
   if (!currentPage) {
     return {
       products: [],
@@ -57,13 +57,15 @@ const assertPage = (page: unknown) => {
   return parsed
 }
 
+const placeholders = Array.from({ length: 5 }).map((_, i) => i)
+
 const PLP = (_: PLPProps) => {
   const router = useRouter()
   const { page } = router.query
   const currentPage = assertPage(page)
 
   const {
-    data: { products = [], totalPages = 0, totalResults = 0 } = {},
+    data: { products = null, totalPages = 0, totalResults = 0 } = {},
     isLoading,
     isValidating,
   } = useSWR(['plp-products', currentPage], fetcher)
@@ -71,48 +73,48 @@ const PLP = (_: PLPProps) => {
   const hasPreviousPage = currentPage > 1
   const hasNextPage = currentPage < totalPages
 
-  const isBusy = (isLoading || isValidating) && products.length === 0
-  const hasNoResults = !isBusy && products.length === 0
-  const hasResults = !isBusy && products.length > 0
+  const isBusy = (isLoading || isValidating) && !products
 
   return (
     <>
-      {hasResults ? (
+      {!isBusy && products ? <ProductList products={products} /> : null}
+
+      {isBusy && !products ? (
         <TypographyUL>
-          {products.map((product) => {
-            return <li key={product.id}>{product.title}</li>
+          {placeholders.map((placeholder) => {
+            return <li key={placeholder}>Loading...</li>
           })}
         </TypographyUL>
       ) : null}
 
-      {hasNoResults ? <div>No results</div> : null}
-
-      {isBusy ? <div>Loading...</div> : null}
-
-      <div className="mt-4">Results: {totalResults}</div>
-      <div>Pages: {totalPages}</div>
-      <p>Current page: {currentPage}</p>
+      <div className="my-4 px-4 py-2 border rounded-sm">
+        <PaginationStats
+          currentPage={currentPage}
+          totalPages={totalPages}
+          totalResults={totalResults}
+        />
+      </div>
 
       <div className="flex gap-2">
-        <Link
+        <PaginationLink
+          basePath="/pages/plp-pages-loading/"
+          page={currentPage}
+          disabled={!hasPreviousPage || isBusy}
+          backward
           shallow
-          href={`/pages/plp-pages-swr/?page=${currentPage - 1}`}
-          {...{ inert: !hasPreviousPage ? '' : undefined }}
         >
-          <Button variant={hasPreviousPage ? 'secondary' : 'outline'}>
-            Previous page
-          </Button>
-        </Link>
+          Previous page
+        </PaginationLink>
 
-        <Link
+        <PaginationLink
+          basePath="/pages/plp-pages-loading/"
+          page={currentPage}
+          disabled={!hasNextPage || isBusy}
+          forward
           shallow
-          href={`/pages/plp-pages-swr/?page=${currentPage + 1}`}
-          {...{ inert: !hasNextPage ? '' : undefined }}
         >
-          <Button variant={hasNextPage ? 'secondary' : 'outline'}>
-            Next page
-          </Button>
-        </Link>
+          Next page
+        </PaginationLink>
       </div>
     </>
   )

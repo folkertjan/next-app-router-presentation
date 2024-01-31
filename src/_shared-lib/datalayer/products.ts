@@ -1,8 +1,12 @@
 import { Special } from '@/types'
+import { delay } from '../utils'
 
 type Endpoint = 'products' | 'products/categories'
-type QueryKey = 'limit'
-type Query = Record<QueryKey, number | string>
+type QueryKey = 'limit' | 'nonce'
+type Query = { [K in QueryKey]?: number | string }
+type Config = {
+  delay: number
+}
 
 const fetchFromApi = async <T>(endpoint: Endpoint, query?: Query) => {
   const searchParams = new URLSearchParams()
@@ -68,7 +72,7 @@ export const fetchProductsByPage = async ({
   limit: number
   page: number
 }) => {
-  const products = await fetchProducts()
+  const products = await fetchProducts({ nonce: page })
   const productChunks = chunkArray(products, limit)
 
   return {

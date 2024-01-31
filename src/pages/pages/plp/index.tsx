@@ -1,10 +1,11 @@
 import { GetStaticProps } from 'next'
+
 import {
   Product,
   fetchCategories,
   fetchProducts,
 } from '@/_shared-lib/datalayer/products'
-import { TypographyH2, TypographyUL } from '@/_shared-components/ui/typography'
+import { ProductList } from '@/_shared-components/scopes/products/product-list'
 
 import { LayoutRootProps, getLayoutRoot } from '@/pages-components/layout-root'
 
@@ -12,17 +13,8 @@ interface PLPProps extends LayoutRootProps {
   products: Product[]
 }
 
-const PLP = (props: PLPProps) => {
-  if (props.products.length === 0) {
-    return <TypographyH2>No products found</TypographyH2>
-  }
-  return (
-    <TypographyUL>
-      {props.products.map((product) => {
-        return <li key={product.id}>{product.title}</li>
-      })}
-    </TypographyUL>
-  )
+const PLP = ({ products }: PLPProps) => {
+  return <ProductList products={products} />
 }
 
 export const getStaticProps: GetStaticProps<PLPProps> = async () => {
