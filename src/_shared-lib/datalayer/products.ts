@@ -1,15 +1,16 @@
 import { Special } from '@/types'
-import { delay } from '../utils'
 
-type Endpoint = 'products' | 'products/categories'
-type QueryKey = 'limit' | 'nonce'
+type Endpoint = 'products' | 'categories'
+type QueryKey = 'limit' | 'nonce' | 'delay'
 type Query = { [K in QueryKey]?: number | string }
-type Config = {
-  delay: number
-}
 
-const fetchFromApi = async <T>(endpoint: Endpoint, query?: Query) => {
+const fetchFromApi = async <T>(
+  endpoint: Endpoint,
+  query?: Query,
+  init?: RequestInit,
+) => {
   const searchParams = new URLSearchParams()
+  searchParams.set('delay', '1000')
 
   if (query) {
     Object.entries(query).map(([key, value]) => {
@@ -20,9 +21,10 @@ const fetchFromApi = async <T>(endpoint: Endpoint, query?: Query) => {
   const queryString = searchParams.toString()
 
   const response = await fetch(
-    `https://fakestoreapi.com/${endpoint}${
+    `https://next-app-router-presentation-git-presentation-rsc-folkertjan.vercel.app/api/store/${endpoint}${
       queryString ? `?${queryString}` : ''
     }`,
+    init,
   )
 
   if (!response.ok) {
@@ -47,8 +49,8 @@ export interface Product {
   }
 }
 
-export const fetchProducts = (query?: Query) => {
-  return fetchFromApi<Product[]>('products', query)
+export const fetchProducts = async (query?: Query, init?: RequestInit) => {
+  return fetchFromApi<Product[]>('products', query, init)
 }
 
 const chunkArray = <T extends Array<any>>(array: T, size: number) => {
@@ -65,14 +67,17 @@ const chunkArray = <T extends Array<any>>(array: T, size: number) => {
   return chunks
 }
 
-export const fetchProductsByPage = async ({
-  limit,
-  page,
-}: {
-  limit: number
-  page: number
-}) => {
-  const products = await fetchProducts({ nonce: page })
+export const fetchProductsByPage = async (
+  {
+    limit,
+    page,
+  }: {
+    limit: number
+    page: number
+  },
+  init?: RequestInit,
+) => {
+  const products = await fetchProducts({ nonce: page }, init)
   const productChunks = chunkArray(products, limit)
 
   return {
@@ -82,6 +87,6 @@ export const fetchProductsByPage = async ({
   }
 }
 
-export const fetchCategories = () => {
-  return fetchFromApi<Category[]>('products/categories')
+export const fetchCategories = (init?: RequestInit) => {
+  return fetchFromApi<Category[]>('categories', undefined, init)
 }

@@ -3,7 +3,7 @@ import { fetchProducts } from '@/_shared-lib/datalayer/products'
 import { ProductList } from '@/_shared-components/scopes/products/product-list'
 
 const PLP = async () => {
-  const products = await fetchProducts()
+  const products = await fetchProducts(undefined)
   return <ProductList products={products} />
 }
 

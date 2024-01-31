@@ -13,10 +13,15 @@ interface PLPProps {
 }
 
 const PLPProductList = async ({ page }: { page: number }) => {
-  const { products } = await fetchProductsByPage({
-    limit: 5,
-    page,
-  })
+  unstable_noStore()
+
+  const { products } = await fetchProductsByPage(
+    {
+      limit: 5,
+      page,
+    },
+    { cache: 'force-cache' },
+  )
 
   return <ProductList products={products} />
 }
@@ -24,10 +29,13 @@ const PLPProductList = async ({ page }: { page: number }) => {
 const PLP = async ({ searchParams: { page } }: PLPProps) => {
   const currentPage = page ? parseInt(page) : 1
 
-  const { totalResults, totalPages } = await fetchProductsByPage({
-    limit: 5,
-    page: 1,
-  })
+  const { totalResults, totalPages } = await fetchProductsByPage(
+    {
+      limit: 5,
+      page: 1,
+    },
+    { cache: 'force-cache' },
+  )
 
   const hasPreviousPage = currentPage > 1
   const hasNextPage = currentPage < totalPages
@@ -59,7 +67,7 @@ const PLP = async ({ searchParams: { page } }: PLPProps) => {
 
       <div className="flex gap-2">
         <PaginationLink
-          basePath="/app/plp-pages-loading/"
+          basePath="/app/plp-pages-loading-cache/"
           page={currentPage}
           disabled={!hasPreviousPage}
           backward
@@ -68,7 +76,7 @@ const PLP = async ({ searchParams: { page } }: PLPProps) => {
         </PaginationLink>
 
         <PaginationLink
-          basePath="/app/plp-pages-loading/"
+          basePath="/app/plp-pages-loading-cache/"
           page={currentPage}
           disabled={!hasNextPage}
           forward

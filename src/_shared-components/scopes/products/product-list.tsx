@@ -1,8 +1,4 @@
-import {
-  TypographyH1,
-  TypographyH2,
-  TypographyUL,
-} from '@/_shared-components/ui/typography'
+import { TypographyUL } from '@/_shared-components/ui/typography'
 import { Product } from '@/_shared-lib/datalayer/products'
 
 interface ProductListProps {

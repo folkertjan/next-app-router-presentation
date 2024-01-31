@@ -1,9 +1,5 @@
 import { fetchProducts } from '@/_shared-lib/datalayer/products'
-import {
-  TypographyH1,
-  TypographyH2,
-  TypographyUL,
-} from '@/_shared-components/ui/typography'
+import { TypographyH1 } from '@/_shared-components/ui/typography'
 import { ProductList } from '@/_shared-components/scopes/products/product-list'
 
 const Home = async () => {
