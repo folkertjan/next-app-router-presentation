@@ -1,22 +1,17 @@
-import { TypographyH1 } from '@/components/ui/typography'
+import { TypographyH1 } from '@/shared-components/ui/typography'
 import { LayoutRoot } from './layout-root'
 
 interface LayoutLayoutProps extends React.PropsWithChildren {
-  time: string
-  cloudflare: string
+  title: string
 }
 
-const LayoutLayout = ({ time, cloudflare, children }: LayoutLayoutProps) => {
+const LayoutLayout = ({ title, children }: LayoutLayoutProps) => {
   return (
     <>
       <div className="pt-32">
         <TypographyH1 asChild>
-          <p>Layout</p>
+          <p>Layout: {title}</p>
         </TypographyH1>
-        <div className="mt-8">
-          <div>Time: {time}</div>
-          <div className="mt-2">Cloudflare fetched timestamp: {cloudflare}</div>
-        </div>
 
         <label className="mt-4">
           This input retains state through page transitions

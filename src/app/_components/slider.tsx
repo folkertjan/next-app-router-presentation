@@ -6,9 +6,9 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '@/components/ui/carousel'
+} from '@/shared-components/ui/carousel'
 import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
-import { type CarouselApi } from '@/components/ui/carousel'
+import { type CarouselApi } from '@/shared-components/ui/carousel'
 import { cn } from '@/lib/utils'
 import {
   Children,
@@ -22,7 +22,7 @@ import {
 import FocusLock from 'react-focus-lock'
 import { useQueryParamControls } from '../_hooks/use-query-param-controls'
 import { group } from 'console'
-import { ScrollArea } from '@/components/ui/scroll-area'
+import { ScrollArea } from '@/shared-components/ui/scroll-area'
 
 const SliderContext = createContext<CarouselApi>(null)
 

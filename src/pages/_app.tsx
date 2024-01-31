@@ -2,8 +2,8 @@ import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 import type { ComponentType, ReactElement, ReactNode } from 'react'
 
-import { ThemeProvider } from '@/components/theme-provider'
-import { AnimationProvider } from '@/components/animation-provider'
+import { ThemeProvider } from '@/shared-components/theme-provider'
+import { AnimationProvider } from '@/shared-components/animation-provider'
 import { cn } from '@/lib/utils'
 import { fontSans, fontSerif } from '@/config/font'
 
