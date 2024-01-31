@@ -1,25 +1,7 @@
-import { Slider, SliderSlide } from './_components/slider'
-import {
-  SlideAppRouterCache,
-  SlideAppRouterData,
-  SlideIntro,
-  SlidePagesRouterCache,
-  SlidePagesRouterData,
-} from '@/components/scopes/intro/slides'
-import { SlideStaticPage } from '@/components/scopes/static-page/slides'
-import { SlideDynamicPage } from '@/components/scopes/dynamic-page/slides'
-import { SlideApi } from '@/components/scopes/api/slides'
+import { Slider, SliderSlide } from '@/app-components/elements/slider'
+import { SlideIntro, TestSlide } from '@/app-components/scopes/slides'
 
-const SLIDES = [
-  SlideIntro,
-  SlidePagesRouterData,
-  SlidePagesRouterCache,
-  SlideAppRouterData,
-  SlideAppRouterCache,
-  SlideStaticPage,
-  SlideDynamicPage,
-  SlideApi,
-]
+const SLIDES = [SlideIntro, TestSlide]
 
 interface HomePageProps {
   searchParams?: {

@@ -1,13 +1,13 @@
 import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
-import type { ComponentType, ReactElement, ReactNode } from 'react'
+import type { ReactElement, ReactNode } from 'react'
 
-import { ThemeProvider } from '@/components/theme-provider'
-import { AnimationProvider } from '@/components/animation-provider'
-import { cn } from '@/lib/utils'
-import { fontSans, fontSerif } from '@/config/font'
+import { ThemeProvider } from '@/_shared-components/theme-provider'
+import { AnimationProvider } from '@/_shared-components/animation-provider'
+import { cn } from '@/_shared-lib/utils'
+import { fontSans, fontSerif } from '@/_shared-config/font'
 
-import '@/app/globals.css'
+import '@/_shared-styles/globals.css'
 
 type Page<P = {}> = NextPage<P> & {
   getLayout?: (page: ReactElement, props: any) => ReactNode

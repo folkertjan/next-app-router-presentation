@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
-import './globals.css'
-import { cn } from '@/lib/utils'
-import { fontSans, fontSerif } from '@/config/font'
-import { ThemeProvider } from '@/components/theme-provider'
-import { AnimationProvider } from '@/components/animation-provider'
+import { cn } from '@/_shared-lib/utils'
+import { fontSans, fontSerif } from '@/_shared-config/font'
+import { ThemeProvider } from '@/_shared-components/theme-provider'
+import { AnimationProvider } from '@/_shared-components/animation-provider'
+
+import '@/_shared-styles/globals.css'
 
 export const metadata: Metadata = {
   title: 'App Router Shenanigans',
