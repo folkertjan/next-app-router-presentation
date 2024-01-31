@@ -21,7 +21,7 @@ export const LayoutRootSwr = ({ children }: LayoutRootSwrProps) => {
 
         <div className="w-fit ml-auto">
           {categories && categories.length > 0 ? (
-            <ul className="flex  gap-3">
+            <ul className="flex gap-3">
               {categories.map((category) => (
                 <li key={category} className="underline">
                   <Link href="/pages/plp-pages-loading">{category}</Link>

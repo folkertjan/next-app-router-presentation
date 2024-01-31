@@ -71,13 +71,18 @@ export const fetchProductsByPage = async (
   {
     limit,
     page,
+    nonce,
   }: {
     limit: number
     page: number
+    nonce?: string
   },
   init?: RequestInit,
 ) => {
-  const products = await fetchProducts({ nonce: page }, init)
+  const products = await fetchProducts(
+    { nonce: nonce ? nonce + page : page },
+    init,
+  )
   const productChunks = chunkArray(products, limit)
 
   return {
@@ -87,6 +92,6 @@ export const fetchProductsByPage = async (
   }
 }
 
-export const fetchCategories = (init?: RequestInit) => {
-  return fetchFromApi<Category[]>('categories', undefined, init)
+export const fetchCategories = (query?: Query, init?: RequestInit) => {
+  return fetchFromApi<Category[]>('categories', query, init)
 }

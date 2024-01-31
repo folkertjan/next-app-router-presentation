@@ -4,7 +4,6 @@ import { PaginationStats } from '@/_shared-components/scopes/products/pagination
 import { PaginationLink } from '@/_shared-components/scopes/products/pagination-link'
 import { Suspense } from 'react'
 import { TypographyUL } from '@/_shared-components/ui/typography'
-import { unstable_noStore } from 'next/cache'
 
 interface PLPProps {
   searchParams: {
@@ -13,12 +12,11 @@ interface PLPProps {
 }
 
 const PLPProductList = async ({ page }: { page: number }) => {
-  unstable_noStore()
-
   const { products } = await fetchProductsByPage(
     {
       limit: 5,
       page,
+      nonce: 'cache',
     },
     { cache: 'force-cache' },
   )
@@ -33,6 +31,7 @@ const PLP = async ({ searchParams: { page } }: PLPProps) => {
     {
       limit: 5,
       page: 1,
+      nonce: 'cache',
     },
     { cache: 'force-cache' },
   )
