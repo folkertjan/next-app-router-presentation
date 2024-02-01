@@ -366,30 +366,6 @@ const slidePagesPageLayoutLayoutSWRCode = syntaxDocument`
   }
 `
 
-const slidePagesPageLayoutSWRCode = syntaxDocument`
-interface HomePageProps {
-  products: Product[]
-}
-
-const Home = ({ products }: HomePageProps) => {
-  return (        
-    <ProductList products={products} />
-  )
-}
-
-export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
-  const products = await fetchProducts({ limit: 3 })
-
-  return {
-    props: { products },
-  }
-}
-
-Home.getLayout = getLayout
-
-export default Home
-`
-
 const SlidePagesPageLayoutLayoutSWRCode = () => {
   return (
     <div className="w-5/6 mx-auto grid content-center h-[80svh]">
@@ -397,14 +373,6 @@ const SlidePagesPageLayoutLayoutSWRCode = () => {
         document={slidePagesPageLayoutLayoutSWRCode}
         highlightLines={[2, 5]}
       />
-    </div>
-  )
-}
-
-const SlidePagesPageLayoutSWRCode = () => {
-  return (
-    <div className="w-5/6 mx-auto grid content-center h-[80svh]">
-      <SyntaxHighlighter document={slidePagesPageLayoutSWRCode} />
     </div>
   )
 }
@@ -575,6 +543,25 @@ const SlidePagesPagePLPPagesLoading = () => {
       src="/pages/plp-pages-loading"
       className="w-5/6 mx-auto h-[80svh]"
     />
+  )
+}
+
+const SlidePagesProblemDefinition = () => {
+  return (
+    <div className="p-2 flex flex-col items-center justify-center">
+      <TypographyH1
+        asChild
+        className="text-center text-balance max-w-lg mx-auto"
+      >
+        <h2>Why is this a problem?</h2>
+      </TypographyH1>
+      <TypographyUL>
+        <li>Easy to fetch the same thing in multiple pages</li>
+        <li>Client-side fetch + loading for global data</li>
+        <li>Hard-to-read client-side js code with data fallbacks</li>
+        <li>Probably needs api routes for swr</li>
+      </TypographyUL>
+    </div>
   )
 }
 
@@ -1250,7 +1237,6 @@ export const slides = [
   SlidePagesProblem,
   SlidePagesPageHome,
   SlidePagesPageHomeCode,
-  SlidePagesPageHome,
   SlidePagesPageHomeLayout,
   SlidePagesPageHomeLayoutLayoutBaseCode,
   SlidePagesPageHomeLayoutAppBaseCode,
@@ -1262,13 +1248,13 @@ export const slides = [
   SlidePagesPagePLP,
   SlidePagesPagePLPCode,
   SlidePagesPageLayoutLayoutSWRCode,
-  SlidePagesPageLayoutSWRCode,
   SlidePagesPageHomeLayoutSWR,
   SlidePagesPagePLPPages,
   SlidePagesPagePLPPagesCode,
   SlidePagesPagePLPPages,
   SlidePagesPagePLPPagesCodeSWR,
   SlidePagesPagePLPPagesLoading,
+  SlidePagesProblemDefinition,
   SlideAppRouter,
   SlideReactNext,
   SlideReactLand,
