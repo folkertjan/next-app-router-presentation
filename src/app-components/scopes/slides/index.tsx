@@ -555,7 +555,7 @@ const SlidePagesProblemDefinition = () => {
       >
         <h2>Why is this a problem?</h2>
       </TypographyH1>
-      <TypographyUL>
+      <TypographyUL className="mt-16">
         <li>Easy to fetch the same thing in multiple pages</li>
         <li>Client-side fetch + loading for global data</li>
         <li>Hard-to-read client-side js code with data fallbacks</li>
@@ -1190,7 +1190,6 @@ const PLP = async ({ searchParams: { page } }: PLPProps) => {
   const { products, totalResults, totalPages } = await fetchProductsByPage({
     limit: 5,
     page: currentPage,
-    nonce: 'plp-pages',
   })
 
   const hasPreviousPage = currentPage > 1
@@ -1214,6 +1213,115 @@ const SlideAppPagePLPCode = () => {
   return (
     <div className="w-5/6 mx-auto grid content-center h-[80svh]">
       <SyntaxHighlighter document={slideAppPagePLPCode} />
+    </div>
+  )
+}
+
+const SlideAppPagePLP = () => {
+  return <Iframe src="/app/plp-pages" className="w-5/6 mx-auto h-[80svh]" />
+}
+
+const slideAppPagePLPLoadingCode = syntaxDocument`
+interface PLPProps {
+  searchParams: {
+    page?: string
+  }
+}
+
+const PLPProductList = async ({ page }) => {
+  const { products, totalResults, totalPages } = await fetchProductsByPage({
+    limit: 5,
+    page: page,
+  })
+
+  return (
+    <ProductList products={products} />
+  )
+}
+
+const PLP = async ({ searchParams: { page } }: PLPProps) => {
+  const currentPage = page ? parseInt(page) : 1
+  const { products, totalResults, totalPages } = await fetchProductsByPage({
+    limit: 5,
+    page: 1,
+  })
+
+  const hasPreviousPage = currentPage > 1
+  const hasNextPage = currentPage < totalPages
+
+  return (
+    <>
+      <Suspense key={page} fallback={'loading...'}>
+        <ProductList page={page} />
+      </Suspense>
+      
+      <Pagination>
+        <LinkPreviousPage>Previous</LinkPreviousPage>
+        <LinkNextPage>Next</LinkNextPage>
+      </Pagination>
+    </>
+  )
+}
+
+export default PLP
+`
+
+const SlideAppPagePLPLoadingCode = () => {
+  return (
+    <div className="w-5/6 mx-auto grid content-center h-[80svh]">
+      <SyntaxHighlighter
+        document={slideAppPagePLPLoadingCode}
+        highlightLines={[22, 30, 31, 32, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]}
+      />
+    </div>
+  )
+}
+
+const SlideAppPagePLPLoading = () => {
+  return (
+    <Iframe src="/app/plp-pages-loading" className="w-5/6 mx-auto h-[80svh]" />
+  )
+}
+
+const SlideConclusion = () => {
+  return (
+    <div className="p-2 flex flex-col items-center justify-center">
+      <TypographyH1
+        asChild
+        className="text-center text-balance max-w-lg mx-auto"
+      >
+        <h2>Comparison</h2>
+      </TypographyH1>
+      <div className="mt-16">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Pages router</TableHead>
+              <TableHead>App Router</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>Fetch same thing in multiple pages</TableCell>
+              <TableCell>
+                No duplicate fetches - even if, gets deduplicated
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Client side fetch / loading global data</TableCell>
+              <TableCell>No client side fetches</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Hard to reason about code for pagination</TableCell>
+              <TableCell>Declarative server-side code</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Probably needs api routes for swr</TableCell>
+              <TableCell>No api routes needed</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </div>
     </div>
   )
 }
@@ -1273,5 +1381,9 @@ export const slides = [
   SlideAppPageLayoutCode,
   SlideAppPageHomeCode,
   SlideAppPagePLPCode,
+  SlideAppPagePLP,
+  SlideAppPagePLPLoadingCode,
+  SlideAppPagePLPLoading,
+  SlideConclusion,
   SlideFin,
 ]
