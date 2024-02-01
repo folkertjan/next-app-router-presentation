@@ -1,7 +1,5 @@
 import { Slider, SliderSlide } from '@/app-components/elements/slider'
-import { SlideIntro, TestSlide } from '@/app-components/scopes/slides'
-
-const SLIDES = [SlideIntro, TestSlide]
+import { slides } from '@/app-components/scopes/slides'
 
 interface HomePageProps {
   searchParams?: {
@@ -14,7 +12,7 @@ const HomePage = ({ searchParams: { slide } = {} }: HomePageProps) => {
   return (
     <main className="h-screen px-16 py-4 lg:py-8 lg:px-16 flex flex-col items-center justify-center">
       <Slider startIndex={startIndex}>
-        {SLIDES.map((Component, index) => (
+        {slides.map((Component, index) => (
           <SliderSlide key={index}>
             <Component />
           </SliderSlide>
