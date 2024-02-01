@@ -24,6 +24,7 @@ import {
   TableRow,
 } from '@/_shared-components/ui/table'
 import { Button } from '@/_shared-components/ui/button'
+import { Iframe } from '@/app-components/primitives/iframe'
 
 const SlideIntro = () => {
   return (
@@ -89,10 +90,503 @@ const SlidePagesProblem = () => {
       >
         <h2>The pages router problem</h2>
       </TypographyH1>
+    </div>
+  )
+}
 
-      <Button className="mt-8" variant="secondary">
-        Demo
-      </Button>
+const SlidePagesPageHome = () => {
+  return <Iframe src="/pages/home" className="w-5/6 mx-auto h-[80svh]" />
+}
+
+const slidePagesPageHomeCode = `
+  interface HomePageProps {
+    products: Product[]
+  }
+
+  const Home = ({ products }: HomePageProps) => {
+    return (        
+      <ProductList products={products} />
+    )
+  }
+
+  export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
+    const products = await fetchProducts({ limit: 3 })
+
+    return {
+      props: { products },
+    }
+  }
+
+  export default Home
+`
+
+const SlidePagesPageHomeCode = () => {
+  return (
+    <div className="w-5/6 mx-auto grid content-center h-[80svh]">
+      <SyntaxHighlighter document={slidePagesPageHomeCode} />
+    </div>
+  )
+}
+
+const SlidePagesPageHomeLayout = () => {
+  return <Iframe src="/pages/home-layout" className="w-5/6 mx-auto h-[80svh]" />
+}
+
+const slidePagesPageHomeLayoutLayoutBaseCode = `
+  interface LayoutProps extends React.PropsWithChildren {}
+
+  const Layout = ({ children }: LayoutProps) => {
+    return (
+      <>   
+        <Menu />
+        {children}
+      </>
+    )
+  }
+
+  export const getLayout = (page) => {
+    return (
+      <Layout>
+        {page}
+      </Layout>
+    )
+  }
+`
+
+const slidePagesPageHomeLayoutAppBaseCode = `
+  const App = ({ Component, pageProps }: LayoutProps) => {
+    const getLayout = Component.getLayout || ((page) => page)
+
+    return (
+      <>   
+        {getLayout(<Component {...pageProps} />)}
+      </>
+    )
+  }
+
+  export default App
+`
+
+const slidePagesPageHomeLayoutBaseCode = `
+  interface HomePageProps {
+    products: Product[]
+  }
+
+  const Home = ({ products }: HomePageProps) => {
+    return (        
+      <ProductList products={products} />
+    )
+  }
+
+  export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
+    const products = await fetchProducts({ limit: 3 })
+
+    return {
+      props: { products },
+    }
+  }
+
+  Home.getLayout = getLayout
+
+  export default Home
+`
+
+const slidePagesPageHomeLayoutLayoutCode = `
+  interface LayoutProps extends React.PropsWithChildren {
+    categories: Category[]
+  }
+
+  const Layout = ({ categories, children }: LayoutProps) => {
+    return (
+      <>   
+        <Menu categories={categories} />
+        {children}
+      </>
+    )
+  }
+
+  export const getLayout = (page, pageProps) => {
+    return (
+      <Layout {...pageProps}>
+        {page}
+      </Layout>
+    )
+  }
+`
+
+const slidePagesPageHomeLayoutAppCode = `
+  const App = ({ Component, pageProps }: LayoutProps) => {
+    const getLayout = Component.getLayout || ((page) => page)
+
+    return (
+      <>   
+        {getLayout(<Component {...pageProps} />, pageProps)}
+      </>
+    )
+  }
+
+  export default App
+`
+
+const slidePagesPageHomeLayoutCode = `
+  interface HomePageProps {
+    products: Product[]
+  }
+
+  const Home = ({ products }: HomePageProps) => {
+    return (        
+      <ProductList products={products} />
+    )
+  }
+
+  export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
+    const products = await fetchProducts({ limit: 3 })
+    const categories = await fetchCategories()
+
+    return {
+      props: { products, categories },
+    }
+  }
+
+  Home.getLayout = getLayout
+
+  export default Home
+`
+
+const SlidePagesPageHomeLayoutLayoutBaseCode = () => {
+  return (
+    <div className="w-5/6 mx-auto grid content-center h-[80svh]">
+      <SyntaxHighlighter document={slidePagesPageHomeLayoutLayoutBaseCode} />
+    </div>
+  )
+}
+
+const SlidePagesPageHomeLayoutAppBaseCode = () => {
+  return (
+    <div className="w-5/6 mx-auto grid content-center h-[80svh]">
+      <SyntaxHighlighter document={slidePagesPageHomeLayoutAppBaseCode} />
+    </div>
+  )
+}
+
+const SlidePagesPageHomeLayoutBaseCode = () => {
+  return (
+    <div className="w-5/6 mx-auto grid content-center h-[80svh]">
+      <SyntaxHighlighter
+        document={slidePagesPageHomeLayoutBaseCode}
+        highlightLines={[20]}
+      />
+    </div>
+  )
+}
+
+const SlidePagesPageHomeLayoutLayoutCode = () => {
+  return (
+    <div className="w-5/6 mx-auto grid content-center h-[80svh]">
+      <SyntaxHighlighter
+        document={slidePagesPageHomeLayoutLayoutCode}
+        highlightLines={[6, 9, 15, 17]}
+      />
+    </div>
+  )
+}
+
+const SlidePagesPageHomeLayoutAppCode = () => {
+  return (
+    <div className="w-5/6 mx-auto grid content-center h-[80svh]">
+      <SyntaxHighlighter document={slidePagesPageHomeLayoutAppCode} />
+    </div>
+  )
+}
+
+const SlidePagesPageHomeLayoutCode = () => {
+  return (
+    <div className="w-5/6 mx-auto grid content-center h-[80svh]">
+      <SyntaxHighlighter
+        document={slidePagesPageHomeLayoutCode}
+        highlightLines={[14, 17, 21]}
+      />
+    </div>
+  )
+}
+
+const SlidePagesPagePLP = () => {
+  return <Iframe src="/pages/plp" className="w-5/6 mx-auto h-[80svh]" />
+}
+
+const slidePagesPagePLPCode = syntaxDocument`
+  interface PLPProps extends LayoutRootProps {
+    products: Product[]
+  }
+
+  const PLP = ({ products }: PLPProps) => {
+    return <ProductList products={products} />
+  }
+
+  export const getStaticProps: GetStaticProps<PLPProps> = async () => {
+    const [products, categories] = await Promise.all([
+      fetchProducts(),
+      fetchCategories(),
+    ])
+
+    return {
+      props: { products, categories },
+    }
+  }
+
+  PLP.getLayout = getLayout
+
+  export default PLP
+`
+const SlidePagesPagePLPCode = () => {
+  return (
+    <div className="w-5/6 mx-auto grid content-center h-[80svh]">
+      <SyntaxHighlighter document={slidePagesPagePLPCode} />
+    </div>
+  )
+}
+
+const slidePagesPageLayoutLayoutSWRCode = syntaxDocument`
+  const Layout = ({ children }: LayoutProps) => {
+    const { data: categories, isLoading } = useSWR('categories', fetchCategories)
+    return (
+      <>   
+        <Menu categories={categories} isLoading={!categories && isLoading} />
+        {children}
+      </>
+    )
+  }
+
+  export const getLayout = (page, pageProps) => {
+    return (
+      <Layout {...pageProps}>
+        {page}
+      </Layout>
+    )
+  }
+`
+
+const slidePagesPageLayoutSWRCode = syntaxDocument`
+interface HomePageProps {
+  products: Product[]
+}
+
+const Home = ({ products }: HomePageProps) => {
+  return (        
+    <ProductList products={products} />
+  )
+}
+
+export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
+  const products = await fetchProducts({ limit: 3 })
+
+  return {
+    props: { products },
+  }
+}
+
+Home.getLayout = getLayout
+
+export default Home
+`
+
+const SlidePagesPageLayoutLayoutSWRCode = () => {
+  return (
+    <div className="w-5/6 mx-auto grid content-center h-[80svh]">
+      <SyntaxHighlighter
+        document={slidePagesPageLayoutLayoutSWRCode}
+        highlightLines={[2, 5]}
+      />
+    </div>
+  )
+}
+
+const SlidePagesPageLayoutSWRCode = () => {
+  return (
+    <div className="w-5/6 mx-auto grid content-center h-[80svh]">
+      <SyntaxHighlighter document={slidePagesPageLayoutSWRCode} />
+    </div>
+  )
+}
+
+const SlidePagesPageHomeLayoutSWR = () => {
+  return (
+    <Iframe src="/pages/home-layout-swr" className="w-5/6 mx-auto h-[80svh]" />
+  )
+}
+
+const SlidePagesPagePLPPages = () => {
+  return <Iframe src="/pages/plp-pages" className="w-5/6 mx-auto h-[80svh]" />
+}
+
+const slidePagesPagePLPPagesCode = syntaxDocument`
+  interface PLPProps extends LayoutRootProps {
+    products: Product[]
+    totalPages: number
+    totalResults: number
+    currentPage: number
+  }
+
+  const PLP = ({ products, totalResults, totalPages, currentPage }: PLPProps) => {
+    const hasPreviousPage = currentPage > 1
+    const hasNextPage = currentPage < totalPages
+
+    return (
+      <>
+        <ProductList products={products} />
+
+        <Pagination>
+          <LinkPreviousPage>Previous</LinkPreviousPage>
+          <LinkNextPage>Next</LinkNextPage>
+        </Pagination>
+      </>
+    )
+  }
+
+  export const getServerSideProps: GetServerSideProps<PLPProps> = async (ctx) => {
+    const currentPage = Number(ctx.query.page ?? 1) || 1
+    const { products, totalPages, totalResults } = await fetchProductsByPage({
+      limit: 5,
+      page: currentPage,
+    })
+
+    return {
+      props: { products, totalPages, totalResults, currentPage, categories },
+    }
+  }
+
+  PLP.getLayout = getLayout
+
+  export default PLP
+`
+
+const SlidePagesPagePLPPagesCode = () => {
+  return (
+    <div className="w-5/6 mx-auto grid content-center h-[80svh]">
+      <SyntaxHighlighter document={slidePagesPagePLPPagesCode} />
+    </div>
+  )
+}
+
+const slidePagesPagePLPPagesCodeSWR = syntaxDocument`
+interface PLPProps extends LayoutRootSwrProps {}
+
+interface PLPSwrProps extends PLPProps {
+  fallback: Record<
+    string,
+    {
+      products: Product[]
+      totalPages: number
+      totalResults: number
+    }
+  >
+}
+
+const fetcher = async ([_, currentPage]: any[]) => fetchProductsByPage({
+  limit: 5,
+  page: pageAsNumber,
+})
+
+const placeholders = Array.from({ length: 5 }).map((_, i) => i)
+
+const PLP = (_: PLPProps) => {
+  const router = useRouter()
+  const { page } = router.query
+  const currentPage = parseInt(page)
+
+  const {
+    data: { products = null, totalPages = 0, totalResults = 0 } = {},
+    isLoading,
+    isValidating,
+  } = useSWR(['plp-products', currentPage], fetcher)
+
+  const hasPreviousPage = currentPage > 1
+  const hasNextPage = currentPage < totalPages
+
+  const isBusy = (isLoading || isValidating) && !products
+
+  return (
+    <>
+      <ProductList products={products} isLoading={isBusy} />
+
+      <Pagination>
+        <LinkPreviousPage shallow>Previous</LinkPreviousPage>
+        <LinkNextPage shallow>Next</LinkNextPage>
+      </Pagination>
+    </>
+  )
+}
+
+const PLPSwr = ({ fallback, ...restProps }: PLPSwrProps) => {
+  return (
+    <SWRConfig
+      value={{
+        fallback,
+      }}
+    >
+      <PLP {...restProps} />
+    </SWRConfig>
+  )
+}
+
+PLPSwr.getLayout = getLayoutRootSwr
+
+export const getServerSideProps: GetServerSideProps<PLPSwrProps> = async (
+  ctx,
+) => {
+  const currentPage = Number(ctx.query.page ?? 1) || 1
+  const [{ products, totalPages, totalResults }, categories] =
+    await Promise.all([
+      fetchProductsByPage({
+        limit: 5,
+        page: currentPage,
+      }),
+      fetchCategories(),
+    ])
+
+  return {
+    props: {
+      fallback: {
+        [unstable_serialize(['plp-products', currentPage])]: {
+          products,
+          totalPages,
+          totalResults,
+        },
+      },
+    },
+  }
+}
+
+export default PLPSwr
+
+`
+
+const SlidePagesPagePLPPagesCodeSWR = () => {
+  return (
+    <div className="w-5/6 mx-auto grid content-center h-[80svh]">
+      <SyntaxHighlighter document={slidePagesPagePLPPagesCodeSWR} />
+    </div>
+  )
+}
+
+const SlidePagesPagePLPPagesLoading = () => {
+  return (
+    <Iframe
+      src="/pages/plp-pages-loading"
+      className="w-5/6 mx-auto h-[80svh]"
+    />
+  )
+}
+
+const SlideAppRouter = () => {
+  return (
+    <div className="p-2 flex flex-col items-center justify-center">
+      <TypographyH1
+        asChild
+        className="text-center text-balance max-w-lg mx-auto"
+      >
+        <h2>App router + RSC to the rescue</h2>
+      </TypographyH1>
     </div>
   )
 }
@@ -111,7 +605,7 @@ const SlideReactNext = () => {
         <Table className="text-lg">
           <TableHeader>
             <TableRow>
-              <TableHead>React (19)</TableHead>
+              <TableHead>React</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -159,7 +653,7 @@ const SlideReactLand = () => {
         asChild
         className="text-center text-balance max-w-lg mx-auto"
       >
-        <h2>React (19) land</h2>
+        <h2>React land</h2>
       </TypographyH1>
     </div>
   )
@@ -168,7 +662,7 @@ const SlideReactLand = () => {
 const slideServer = syntaxDocument`
   const Component = () => {
     return 'hello world'
-  }
+  } 
 `
 
 const SlideServer = () => {
@@ -185,7 +679,7 @@ const SlideServer = () => {
         asChild
         className="text-center text-balance max-w-lg mx-auto mt-6"
       >
-        <div>React (19) feature</div>
+        <div>React feature</div>
       </TypographyBlockQuote>
 
       <div className="mt-16">
@@ -194,6 +688,14 @@ const SlideServer = () => {
     </div>
   )
 }
+
+const slideServerTall = syntaxDocument`
+  const Component = () => {
+    return 'hello world'
+  } 
+
+
+`
 
 const slideClient = syntaxDocument`
   'use client'
@@ -217,7 +719,7 @@ const SlideClient = () => {
         asChild
         className="text-center text-balance max-w-lg mx-auto mt-6"
       >
-        <div>React (19) feature</div>
+        <div>React feature</div>
       </TypographyBlockQuote>
 
       <div className="mt-16">
@@ -254,21 +756,97 @@ const SlideServerVsClient = () => {
           </TypographyH4>
         </div>
         <div className="flex gap-8">
-          <SyntaxHighlighter document={slideServer} />
-
-          <SyntaxHighlighter document={slideClient} />
+          <div className="flex-grow">
+            <SyntaxHighlighter document={slideServerTall} />
+          </div>
+          <div className="flex-grow">
+            <SyntaxHighlighter document={slideClient} />
+          </div>
         </div>
         <div className="flex gap-8">
           <div className="flex-grow">
             <TypographyUL>
-              <li>Renders on server</li>
-              <li>Does not hydrate on client (no client js)</li>
+              <li>Renders on server / build</li>
+              <li>Does not hydrate on client</li>
+              <li className="italic">No client state</li>
+              <li className="italic">No client events</li>
             </TypographyUL>
           </div>
           <div className="flex-grow">
             <TypographyUL>
-              <li>Renders on server</li>
-              <li>Hydrates on client (client js)</li>
+              <li>Renders on server / build</li>
+              <li>Hydrates on client</li>
+              <li className="italic">Client state</li>
+              <li className="italic">Client events</li>
+            </TypographyUL>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+const slideServerFetch = syntaxDocument`
+const Component = async () => {
+  const data = await fetch('...')
+
+  const adaptedData = adapt(data)
+
+  return adaptedData.title
+}
+
+
+
+
+`
+
+const slideClientState = syntaxDocument`
+'use client'
+
+const Component = () => {
+  const [state, setState] = useState(0);
+
+  return (
+    <button onClick={() => setState(state => state + 1)}>
+      {state}
+    </button>
+    )
+}
+`
+
+const SlideServerVsClientTwo = () => {
+  return (
+    <div className="p-2 flex flex-col items-center justify-center">
+      <div>
+        <div className="flex gap-8">
+          <TypographyH4 className="text-center flex-grow">
+            Server component
+          </TypographyH4>
+          <TypographyH4 className="text-center flex-grow">
+            "Client" component
+          </TypographyH4>
+        </div>
+        <div className="flex gap-8">
+          <div className="flex-grow w-1/2">
+            <SyntaxHighlighter document={slideServerFetch} />
+          </div>
+          <div className="flex-grow w-1/2">
+            <SyntaxHighlighter document={slideClientState} />
+          </div>
+        </div>
+        <div className="flex gap-8">
+          <div className="flex-grow">
+            <TypographyUL>
+              <li>Fetch / modify data</li>
+              <li>Non-interactive content</li>
+              <li>Should be most</li>
+            </TypographyUL>
+          </div>
+          <div className="flex-grow">
+            <TypographyUL>
+              <li>Interaction</li>
+              <li>Client-side state</li>
+              <li>Should be least</li>
             </TypographyUL>
           </div>
         </div>
@@ -555,7 +1133,7 @@ const SlideAppDemo = () => {
         asChild
         className="text-center text-balance max-w-lg mx-auto"
       >
-        <h2>The app router solution</h2>
+        <h2>The improved (?) situation</h2>
       </TypographyH1>
 
       <Button className="mt-8" variant="secondary">
@@ -569,11 +1147,34 @@ export const slides = [
   SlideIntro,
   SlideTopics,
   SlidePagesProblem,
+  SlidePagesPageHome,
+  SlidePagesPageHomeCode,
+  SlidePagesPageHome,
+  SlidePagesPageHomeLayout,
+  SlidePagesPageHomeLayoutLayoutBaseCode,
+  SlidePagesPageHomeLayoutAppBaseCode,
+  SlidePagesPageHomeLayoutBaseCode,
+  SlidePagesPageHomeLayoutCode,
+  SlidePagesPageHomeLayoutLayoutCode,
+  SlidePagesPageHomeLayoutAppCode,
+  SlidePagesPageHomeLayout,
+  SlidePagesPagePLP,
+  SlidePagesPagePLPCode,
+  SlidePagesPageLayoutLayoutSWRCode,
+  SlidePagesPageLayoutSWRCode,
+  SlidePagesPageHomeLayoutSWR,
+  SlidePagesPagePLPPages,
+  SlidePagesPagePLPPagesCode,
+  SlidePagesPagePLPPages,
+  SlidePagesPagePLPPagesCodeSWR,
+  SlidePagesPagePLPPagesLoading,
+  SlideAppRouter,
   SlideReactNext,
   SlideReactLand,
   SlideServer,
   SlideClient,
   SlideServerVsClient,
+  SlideServerVsClientTwo,
   SlideNextLand,
   SlideNextPage,
   SlideNextLayout,
