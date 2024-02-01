@@ -1143,6 +1143,107 @@ const SlideAppDemo = () => {
   )
 }
 
+const SlideAppPageHome = () => {
+  return <Iframe src="/app/home-layout" className="w-5/6 mx-auto h-[80svh]" />
+}
+
+const slideAppPageLayoutCode = syntaxDocument`
+interface LayoutRootProps extends React.PropsWithChildren {}
+
+const Layout = async ({ children }: LayoutRootProps) => {
+  const categories = await fetchCategories()
+  return (
+    <>
+      <Menu categories={categories} />
+      {children}
+    </>
+  )
+}
+
+export default Layout
+`
+
+const SlideAppPageLayoutCode = () => {
+  return (
+    <div className="w-5/6 mx-auto grid content-center h-[80svh]">
+      <SyntaxHighlighter document={slideAppPageLayoutCode} />
+    </div>
+  )
+}
+
+const slideAppPageHomeCode = syntaxDocument`
+const Home = async () => {
+  const products = await fetchProducts({ limit: 3 })
+
+  return (
+    <ProductList products={products} />
+  )
+}
+
+export default Home
+`
+
+const SlideAppPageHomeCode = () => {
+  return (
+    <div className="w-5/6 mx-auto grid content-center h-[80svh]">
+      <SyntaxHighlighter document={slideAppPageHomeCode} />
+    </div>
+  )
+}
+
+const slideAppPagePLPCode = syntaxDocument`
+interface PLPProps {
+  searchParams: {
+    page?: string
+  }
+}
+
+const PLP = async ({ searchParams: { page } }: PLPProps) => {
+  const currentPage = page ? parseInt(page) : 1
+  const { products, totalResults, totalPages } = await fetchProductsByPage({
+    limit: 5,
+    page: currentPage,
+    nonce: 'plp-pages',
+  })
+
+  const hasPreviousPage = currentPage > 1
+  const hasNextPage = currentPage < totalPages
+
+  return (
+    <>
+      <ProductList products={products} />
+      
+      <Pagination>
+        <LinkPreviousPage>Previous</LinkPreviousPage>
+        <LinkNextPage>Next</LinkNextPage>
+      </Pagination>
+    </>
+  )
+}
+
+export default PLP
+`
+const SlideAppPagePLPCode = () => {
+  return (
+    <div className="w-5/6 mx-auto grid content-center h-[80svh]">
+      <SyntaxHighlighter document={slideAppPagePLPCode} />
+    </div>
+  )
+}
+
+const SlideFin = () => {
+  return (
+    <div className="p-2 flex flex-col items-center justify-center">
+      <TypographyH1
+        asChild
+        className="text-center text-balance max-w-lg mx-auto"
+      >
+        <h2>That's all folks</h2>
+      </TypographyH1>
+    </div>
+  )
+}
+
 export const slides = [
   SlideIntro,
   SlideTopics,
@@ -1182,4 +1283,9 @@ export const slides = [
   SlideNextLayoutThree,
   SlideNextLayoutFile,
   SlideAppDemo,
+  SlideAppPageHome,
+  SlideAppPageLayoutCode,
+  SlideAppPageHomeCode,
+  SlideAppPagePLPCode,
+  SlideFin,
 ]
