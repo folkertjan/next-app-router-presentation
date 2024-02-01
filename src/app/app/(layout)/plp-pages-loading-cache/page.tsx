@@ -16,7 +16,7 @@ const PLPProductList = async ({ page }: { page: number }) => {
     {
       limit: 5,
       page,
-      nonce: 'cache',
+      nonce: 'plp-pages-loading-cache',
     },
     { cache: 'force-cache' },
   )
@@ -31,7 +31,7 @@ const PLP = async ({ searchParams: { page } }: PLPProps) => {
     {
       limit: 5,
       page: 1,
-      nonce: 'cache',
+      nonce: 'plp-pages-loading-cache',
     },
     { cache: 'force-cache' },
   )

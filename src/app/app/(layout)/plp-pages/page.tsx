@@ -14,6 +14,7 @@ const PLP = async ({ searchParams: { page } }: PLPProps) => {
   const { products, totalResults, totalPages } = await fetchProductsByPage({
     limit: 5,
     page: currentPage,
+    nonce: 'plp-pages',
   })
 
   const hasPreviousPage = currentPage > 1
