@@ -11,6 +11,8 @@ export const metadata: Metadata = {
   description: 'Episode 1: Data fetching',
 }
 
+export const fetchCache = 'default-no-store'
+
 export default function RootLayout({
   children,
 }: {

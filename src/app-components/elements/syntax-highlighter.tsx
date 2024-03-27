@@ -31,7 +31,7 @@ const highlightLine = (
   if (lines.includes(line)) {
     style.opacity = 1
   } else {
-    style.opacity = 0.5
+    style.opacity = 0.4
   }
   return { style }
 }
