@@ -51,7 +51,9 @@ export const ImageSlide = ({
         </TypographyH2>
       ) : null}
 
-      <Image src={src} alt={alt} className="w-5/6 mx-auto h-[75svh]" />
+      <div className="w-5/6 mx-auto h-[75svh] grid items-center">
+        <Image src={src} alt={alt} className="w-full" />
+      </div>
     </div>
   )
 }
