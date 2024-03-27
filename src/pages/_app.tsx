@@ -5,7 +5,7 @@ import type { ReactElement, ReactNode } from 'react'
 import { ThemeProvider } from '@/_shared-components/theme-provider'
 import { AnimationProvider } from '@/_shared-components/animation-provider'
 import { cn } from '@/_shared-lib/utils'
-import { fontSans, fontSerif } from '@/_shared-config/font'
+import { fontSans, fontSerif, fontMono } from '@/_shared-config/font'
 
 import '@/_shared-styles/globals.css'
 
@@ -25,9 +25,10 @@ const MyApp = ({ Component, pageProps }: Props) => {
       <AnimationProvider>
         <div
           className={cn(
-            'min-h-screen bg-background font-sans antialiased',
+            'min-h-screen bg-muted font-sans antialiased',
             fontSans.variable,
             fontSerif.variable,
+            fontMono.variable,
           )}
         >
           {getLayout(<Component {...pageProps} />, pageProps)}

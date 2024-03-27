@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { cn } from '@/_shared-lib/utils'
-import { fontSans, fontSerif } from '@/_shared-config/font'
+import { fontMono, fontSans, fontSerif } from '@/_shared-config/font'
 import { ThemeProvider } from '@/_shared-components/theme-provider'
 import { AnimationProvider } from '@/_shared-components/animation-provider'
 
@@ -23,6 +23,7 @@ export default function RootLayout({
           'min-h-screen bg-background font-sans antialiased',
           fontSans.variable,
           fontSerif.variable,
+          fontMono.variable,
         )}
       >
         <ThemeProvider>

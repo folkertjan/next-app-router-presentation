@@ -1,7 +1,4 @@
-import {
-  SyntaxHighlighter,
-  syntaxDocument,
-} from '@/app-components/elements/syntax-highlighter'
+import { syntaxDocument } from '@/app-components/elements/syntax-highlighter'
 import {
   Avatar,
   AvatarFallback,
@@ -12,22 +9,25 @@ import {
   TypographyH1,
   TypographyP,
 } from '@/_shared-components/ui/typography'
+import { CodeSlide, FrameSlide, ImageSlide } from './variants'
 
-export const SlideIntro = () => {
+import screen1 from '@/public/screens/screen-1.png'
+
+const SlideIntro = () => {
   return (
     <div className="p-2 flex flex-col items-center justify-center">
       <TypographyH1
         asChild
         className="text-center text-balance max-w-lg mx-auto"
       >
-        <h2>React App Router Shenanigans</h2>
+        <h2>Next App Router Shenanigans</h2>
       </TypographyH1>
 
       <TypographyBlockQuote
         asChild
         className="text-center text-balance max-w-lg mx-auto mt-6"
       >
-        <h3>Episode 1: Server components, static data, pages and layouts</h3>
+        <h3>Episode 2: Client vs Server</h3>
       </TypographyBlockQuote>
 
       <div className="inline-flex items-center justify-center mt-16">
@@ -46,11 +46,43 @@ export const SlideIntro = () => {
   )
 }
 
-const codeString = syntaxDocument`
-  const foo = 'bar';
-  const bar = 'foo';
+const codeSlideCodeString = syntaxDocument`
+  interface HomePageProps {
+    products: Product[]
+  }
+
+  const Home = ({ products }: HomePageProps) => {
+    return (        
+      <ProductList products={products} />
+    )
+  }
+
+  export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
+    const products = await fetchProducts({ limit: 3 })
+
+    return {
+      props: { products },
+    }
+  }
+
+  export default Home
 `
 
-export const TestSlide = () => {
-  return <SyntaxHighlighter document={codeString} />
-}
+const CodeSlideExample = () => (
+  <CodeSlide title={'My code slide'} document={codeSlideCodeString} />
+)
+
+const FrameSlideExample = () => (
+  <FrameSlide title={'My frame slide'} src="/pages/home" />
+)
+
+const ImageSlideExample = () => (
+  <ImageSlide src={screen1} title={'My image slide'} />
+)
+
+export const slides = [
+  SlideIntro,
+  CodeSlideExample,
+  FrameSlideExample,
+  ImageSlideExample,
+]

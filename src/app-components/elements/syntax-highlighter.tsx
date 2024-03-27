@@ -1,11 +1,18 @@
 import { PrismLight } from 'react-syntax-highlighter'
 
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
-import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import {
+  solarizedlight,
+  tomorrow,
+} from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 // synthwave84
 // a11yDark
 // atomDark
+// okaida
+// solarizedlight
+
+const style = tomorrow
 
 PrismLight.registerLanguage('jsx', jsx)
 
@@ -31,7 +38,7 @@ const highlightLine = (
   if (lines.includes(line)) {
     style.opacity = 1
   } else {
-    style.opacity = 0.5
+    style.opacity = 0.4
   }
   return { style }
 }
@@ -48,16 +55,18 @@ export const SyntaxHighlighter = ({
   return (
     <PrismLight
       language="jsx"
-      style={atomDark}
+      style={style}
       codeTagProps={{
         style: {
           fontFamily: 'var(--font-mono)',
           fontSize: 'var(--syntax-font-size, 1em)',
         },
       }}
-      customStyle={{
-        backgroundColor: 'hsl(var(--muted))',
-      }}
+      customStyle={
+        {
+          // background: 'var(--gradient)',
+        }
+      }
       wrapLines={true}
       showLineNumbers={true}
       lineProps={(line) => {
