@@ -279,7 +279,7 @@ const AppCodeHeaderInitial = () => (
 )
 
 const appCodeHeaderImprovedCode = syntaxDocument`
-  import { CartLink } from './CartLink'
+  import { CartCounter } from './CartCounter'
   import { AuthLink } from './AuthLink'
 
   export const Header = () => {
@@ -299,7 +299,9 @@ const appCodeHeaderImprovedCode = syntaxDocument`
         <nav aria-label="secondary">
           <ul>
             <li>
-              <CartLink />
+              <a href="/cart">
+                Cart <CartCounter />
+              </a>
             </li>
             <li>
               <AuthLink />
@@ -310,17 +312,49 @@ const appCodeHeaderImprovedCode = syntaxDocument`
     )
   }
 `
-const appCodeHeaderCartLinkCode = syntaxDocument`
+
+const appCodeHeaderImprovedImprovedCode = syntaxDocument`
+  import { CartLinkWithCounter } from './CartLinkWithCounter'
+  import { AuthLink } from './AuthLink'
+
+  export const Header = () => {
+    return ( 
+      <header>
+        <nav aria-label="primary">
+          <ul>
+            <li>
+              <a href="/">
+                <span className="sr-only">Home</span>
+                <img src="/logo.svg" alt="Logo" />
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <nav aria-label="secondary">
+          <ul>
+            <li>
+              <CartLinkWithCounter />
+            </li>
+            <li>
+              <AuthLink />
+            </li>
+          </ul>
+        </nav>
+      </header>       
+    )
+  }
+`
+
+const appCodeHeaderCartCounterCode = syntaxDocument`
   'use client'
 
   import { useCart } from './hooks/useCart'
 
-  export const CartLink = () => {
+  export const CartCounter = () => {
     const { totalQuantity } = useCart()
 
-    return (
-      <a href="/cart">Cart {totalQuantity > 0 ? \`(\${ totalQuantity })\` : null}</a>
-    )
+    return totalQuantity > 0 ? \`( \${ totalQuantity } )\` : null
   }
 `
 
@@ -338,16 +372,20 @@ const appCodeHeaderAuthLinkCode = syntaxDocument`
   }
 `
 
-export const AppCodeHeaderImproved = () => (
+const AppCodeHeaderCartCounter = () => (
+  <CodeSlide document={appCodeHeaderCartCounterCode} />
+)
+
+const AppCodeHeaderAuthLink = () => (
+  <CodeSlide document={appCodeHeaderAuthLinkCode} />
+)
+
+const AppCodeHeaderImproved = () => (
   <CodeSlide document={appCodeHeaderImprovedCode} />
 )
 
-export const AppCodeHeaderCartLink = () => (
-  <CodeSlide document={appCodeHeaderCartLinkCode} />
-)
-
-export const AppCodeHeaderAuthLink = () => (
-  <CodeSlide document={appCodeHeaderAuthLinkCode} />
+const AppCodeHeaderImprovedImproved = () => (
+  <CodeSlide document={appCodeHeaderImprovedImprovedCode} />
 )
 
 export const slides = [
@@ -363,7 +401,8 @@ export const slides = [
   ClientCodeSiteAppSlide,
   AppCodeHeaderIntroSlide,
   AppCodeHeaderInitial,
-  AppCodeHeaderCartLink,
+  AppCodeHeaderCartCounter,
   AppCodeHeaderAuthLink,
   AppCodeHeaderImproved,
+  AppCodeHeaderImprovedImproved,
 ]
