@@ -9,7 +9,7 @@ import {
   TypographyH1,
   TypographyP,
 } from '@/_shared-components/ui/typography'
-import { CodeSlide, FrameSlide, ImageSlide } from './variants'
+import { CodeSlide, FrameSlide, ImageSlide, TextSlide } from './variants'
 
 import screen1 from '@/public/screens/screen-1.png'
 
@@ -27,7 +27,7 @@ const SlideIntro = () => {
         asChild
         className="text-center text-balance max-w-lg mx-auto mt-6"
       >
-        <h3>Episode 2: Client vs Server</h3>
+        <h3>Episode X: Title</h3>
       </TypographyBlockQuote>
 
       <div className="inline-flex items-center justify-center mt-16">
@@ -80,9 +80,16 @@ const ImageSlideExample = () => (
   <ImageSlide src={screen1} title={'My image slide'} />
 )
 
+const TextSlideExample = () => (
+  <TextSlide title={'My text slide'}>
+    <p>Some text here</p>
+  </TextSlide>
+)
+
 export const slides = [
   SlideIntro,
   CodeSlideExample,
   FrameSlideExample,
   ImageSlideExample,
+  TextSlideExample,
 ]
