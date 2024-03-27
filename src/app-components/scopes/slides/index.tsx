@@ -27,7 +27,7 @@ const SlideIntro = () => {
         asChild
         className="text-center text-balance max-w-lg mx-auto mt-6"
       >
-        <h3>Episode X: Title</h3>
+        <h3>Episode 2: Server vs Client</h3>
       </TypographyBlockQuote>
 
       <div className="inline-flex items-center justify-center mt-16">
