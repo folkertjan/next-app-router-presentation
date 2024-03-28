@@ -9,17 +9,32 @@ import screen1 from '@/public/screens/screen-1.png'
 import { document } from 'postcss'
 import { cn } from '@/_shared-lib/utils'
 
-export const CodeSlide = ({ title = '', document = syntaxDocument`` }) => {
+type CodeSlideProps = {
+  document: string
+  title?: string
+  wrapLongLines?: boolean
+  highlightLines?: number[]
+}
+export const CodeSlide = ({
+  title,
+  document,
+  wrapLongLines,
+  highlightLines,
+}: CodeSlideProps) => {
   return (
     <div>
       {title ? (
-        <TypographyH2 className="text-center font-serif text-balance max-w-md mx-auto border-b-0">
+        <TypographyH2 className="text-center font-serif text-balance max-w-md mx-auto border-b-0 pt-8">
           {title}
         </TypographyH2>
       ) : null}
 
-      <div className="w-5/6 mx-auto grid content-center h-[80svh]">
-        <SyntaxHighlighter document={document} />
+      <div className="w-5/6 mx-auto grid content-center h-[75svh]">
+        <SyntaxHighlighter
+          document={document}
+          wrapLongLines={wrapLongLines}
+          highlightLines={highlightLines}
+        />
       </div>
     </div>
   )
@@ -29,7 +44,7 @@ export const FrameSlide = ({ title = '', src = '/pages/home' }) => {
   return (
     <div>
       {title ? (
-        <TypographyH2 className="text-center font-serif text-balance max-w-md mx-auto border-b-0">
+        <TypographyH2 className="text-center font-serif text-balance max-w-md mx-auto border-b-0 pt-8">
           {title}
         </TypographyH2>
       ) : null}
@@ -56,7 +71,7 @@ export const ImageSlide = ({
       {title ? (
         <TypographyH2
           asChild
-          className="text-center font-serif text-balance max-w-md mx-auto border-b-0"
+          className="text-center font-serif text-balance max-w-md mx-auto border-b-0 pt-8"
         >
           <h2>{title}</h2>
         </TypographyH2>
