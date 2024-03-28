@@ -1151,6 +1151,12 @@ const Conclusion = () => (
   </TextSlide>
 )
 
+const Outro = () => (
+  <TextSlide title={'Thats all folks!'} maxWidth="lg">
+    <p>Questions?</p>
+  </TextSlide>
+)
+
 export const slides = [
   Hero,
   ServerVsClient,
@@ -1200,4 +1206,5 @@ export const slides = [
   Approach,
   Review,
   Conclusion,
+  Outro,
 ]
