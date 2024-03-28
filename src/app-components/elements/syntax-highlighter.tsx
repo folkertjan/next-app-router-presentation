@@ -38,7 +38,7 @@ const highlightLine = (
   if (lines.includes(line)) {
     style.opacity = 1
   } else {
-    style.opacity = 0.4
+    style.opacity = 0.5
   }
   return { style }
 }
@@ -46,11 +46,13 @@ const highlightLine = (
 interface CodeProps {
   document: string
   highlightLines?: Array<number>
+  wrapLongLines?: boolean
 }
 
 export const SyntaxHighlighter = ({
   document,
   highlightLines = [],
+  wrapLongLines,
 }: CodeProps) => {
   return (
     <PrismLight
@@ -62,12 +64,11 @@ export const SyntaxHighlighter = ({
           fontSize: 'var(--syntax-font-size, 1em)',
         },
       }}
-      customStyle={
-        {
-          // background: 'var(--gradient)',
-        }
-      }
+      customStyle={{
+        borderRadius: 'var(--radius)',
+      }}
       wrapLines={true}
+      wrapLongLines={wrapLongLines}
       showLineNumbers={true}
       lineProps={(line) => {
         if (highlightLines?.length === 0) return {}

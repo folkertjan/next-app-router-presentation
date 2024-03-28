@@ -44,6 +44,10 @@ export const TypographyBlockQuote = createTypography(
 )
 
 export const TypographyUL = createTypography('ul', 'ml-6 list-disc [&>li]:mt-2')
+export const TypographyOL = createTypography(
+  'ul',
+  'ml-6 list-decimal [&>li]:mt-2',
+)
 
 export const TypographyInlineCode = createTypography(
   'code',
